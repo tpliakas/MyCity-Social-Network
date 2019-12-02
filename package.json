@@ -1,0 +1,19 @@
+{
+  "name": "thesis",
+  "version": "0.0.1-alpha1",
+  "description": "Social network issue tracker",
+  "main": "server.js",
+  "repository": "https://github.com/tpliakas/thesis.git",
+  "author": "Theodore Pliakas",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "express-validator": "^6.3.0",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.13",
+    "request": "^2.88.0"
+  }
+}
