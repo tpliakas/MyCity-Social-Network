@@ -3,10 +3,15 @@
   "version": "0.0.1-alpha1",
   "description": "Social network issue tracker",
   "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
   "repository": "https://github.com/tpliakas/thesis.git",
   "author": "Theodore Pliakas",
   "license": "MIT",
   "dependencies": {
+    "@types/express": "^4.17.2",
     "bcryptjs": "^2.4.3",
     "config": "^3.2.4",
     "express": "^4.17.1",
