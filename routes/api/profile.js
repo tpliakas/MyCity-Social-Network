@@ -106,7 +106,7 @@ router.post(
     }
 );
 
-// @route   POST api/profile
+// @route   GET api/profile
 // @desc    Get all profiles
 // @access  Public
 router.get('/', async (req, res) => {
@@ -118,6 +118,27 @@ router.get('/', async (req, res) => {
         res.json(profiles);
     } catch (err) {
         console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   GET api/profile/user/:user_id
+// @desc    Get profile by user ID
+// @access  Public
+router.get('/user/:user_id', async (req, res) => {
+    try {
+        const profile = await Profile.findOne({
+            _id: req.params.user_id
+        }).populate('user', ['name', 'avatar']);
+
+        if (!profile) return res.status(400).json({ msg: 'Profile not found' });
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        if (err.name === 'CastError') {
+            return res.status(400).json({ msg: 'Profile not found' });
+        }
         res.status(500).send('Server Error');
     }
 });
