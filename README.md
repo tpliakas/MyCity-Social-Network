@@ -1,1 +1,2 @@
-# Social Network Issue Tracker
+# MyCity Social Network
+## Social Network Issue Tracker
