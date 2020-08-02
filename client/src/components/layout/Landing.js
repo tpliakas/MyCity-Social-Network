@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Col, Row } from 'antd';
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
 
 const Landing = () => {
   return (
@@ -9,21 +10,16 @@ const Landing = () => {
           <h1 className="x-large">MyCity Social Network</h1>
           <p className="lead">
             Create a profile, share posts and add issues to make your city
-            better!qd
+            better!
           </p>
           <div className="buttons">
-            <Row>
-              <Col span={12}>
-                <Button type="primary" size="large" href="register.html">
-                  Sign Up
-                </Button>
-              </Col>
-              <Col span={12}>
-                <Button type="primary" size="large" href="login.html">
-                  Login
-                </Button>
-              </Col>
-            </Row>
+            <Button type="primary" size="large">
+              <Link to="/register">Sign Up</Link>
+            </Button>
+
+            <Button type="primary" size="large">
+              <Link to="/login">Login</Link>
+            </Button>
           </div>
         </div>
       </div>

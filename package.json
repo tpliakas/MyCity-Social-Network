@@ -1,5 +1,5 @@
 {
-  "name": "thesis",
+  "name": "mycitynet",
   "version": "0.0.1-alpha2",
   "description": "Social network issue tracker",
   "main": "server.js",

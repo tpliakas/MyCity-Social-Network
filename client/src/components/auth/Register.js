@@ -1,0 +1,195 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Input, Tooltip, Checkbox, Button, Modal } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+
+import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
+
+const Register = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirm: '',
+    name: '',
+    agreement: ''
+  });
+  const [showModal, setShowModal] = useState(false);
+
+  const onValuesChange = (changedValues, allValues) => {
+    setFormData(allValues);
+  };
+
+  const { email, password, confirm, name, agreement } = formData;
+
+  const [form] = Form.useForm();
+
+  const onFinish = async (values) => {
+    console.log('Received values of form: ', values);
+    // MAKE POST REQUEST
+  };
+
+  const showAgreement = () => setShowModal(true);
+  const showAgreementAction = () => setShowModal(false);
+
+  return (
+    <>
+      <h1 className="large text-primary">Sign Up</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> Create Your Account
+      </p>
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        onValuesChange={onValuesChange}
+        scrollToFirstError
+      >
+        <Form.Item
+          name="email"
+          label="E-mail"
+          extra="This site uses Gravatar so if you want a profile image, use a
+            Gravatar email."
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!'
+            },
+            {
+              required: true,
+              message: 'Please input your E-mail!'
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!'
+            }
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!'
+            },
+            ({ getFieldValue }) => ({
+              validator(rule, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  'The two passwords that you entered do not match!'
+                );
+              }
+            })
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <Form.Item
+          name="name"
+          label={
+            <span>
+              Full Name &nbsp;
+              <Tooltip title="What do you want others to call you?">
+                <QuestionCircleOutlined />
+              </Tooltip>
+            </span>
+          }
+          rules={[
+            {
+              required: true,
+              message: 'Please input your nickname!',
+              whitespace: true
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value
+                  ? Promise.resolve()
+                  : Promise.reject('Should accept agreement')
+            }
+          ]}
+          {...tailFormItemLayout}
+        >
+          <Checkbox>
+            I have read the <a onClick={() => setShowModal(true)}>agreement</a>
+          </Checkbox>
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
+      </Form>
+      <Modal
+        title="Terms of Service"
+        visible={showModal}
+        onOk={showAgreementAction}
+        onCancel={showAgreementAction}
+        maskClosable
+      >
+        <p>
+          Facebook builds technologies and services that enable people to
+          connect with each other, build communities, and grow businesses. These
+          Terms govern your use of Facebook, Messenger, and the other products,
+          features, apps, services, technologies, and software we offer (the
+          Facebook Products or Products), except where we expressly state that
+          separate terms (and not these) apply. These Products are provided to
+          you by Facebook Ireland Limited.{' '}
+        </p>
+        <p>
+          We don’t charge you to use Facebook or the other products and services
+          covered by these Terms. Instead, businesses and organizations pay us
+          to show you ads for their products and services. By using our
+          Products, you agree that we can show you ads that we think will be
+          relevant to you and your interests. We use your personal data to help
+          determine which ads to show you.{' '}
+        </p>
+        <p>
+          We don’t sell your personal data to advertisers, and we don’t share
+          information that directly identifies you (such as your name, email
+          address or other contact information) with advertisers unless you give
+          us specific permission. Instead, advertisers can tell us things like
+          the kind of audience they want to see their ads, and we show those ads
+          to people who may be interested. We provide advertisers with reports
+          about the performance of their ads that help them understand how
+          people are interacting with their content. See Section 2 below to
+          learn more.{' '}
+        </p>
+        <p>
+          Our Data Policy explains how we collect and use your personal data to
+          determine some of the ads you see and provide all of the other
+          services described below. You can also go to your settings at any time
+          to review the privacy choices you have about how we use your data.{' '}
+        </p>{' '}
+      </Modal>
+      <p className="my-1">
+        Already have an account? <Link to="/login">Sign In</Link>
+      </p>
+    </>
+  );
+};
+
+export default Register;
