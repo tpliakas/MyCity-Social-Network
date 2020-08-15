@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Form, Input, Tooltip, Checkbox, Button, Modal } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
-import { setAlert } from '../../actions/alert';
 import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
 
-const Register = ({ setAlert }) => {
+const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -29,7 +26,6 @@ const Register = ({ setAlert }) => {
   const onFinish = async (values) => {
     console.log('Received values of form: ', values);
     // MAKE POST REQUEST
-    setAlert('hello bitch!', 'error', 500000000);
   };
 
   const showAgreement = () => setShowModal(true);
@@ -196,8 +192,4 @@ const Register = ({ setAlert }) => {
   );
 };
 
-Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
-};
-
-export default connect(null, { setAlert })(Register);
+export default Register;
