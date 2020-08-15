@@ -65,6 +65,10 @@ img {
   border-color: var(--primary-color-hover);
 }
 
+.ant-alert-message {
+  text-transform: capitalize;
+}
+
 /* Utilities */
 .container {
   max-width: 1100px;
