@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import { Form, Input, Tooltip, Checkbox, Button, Modal } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
 
-const Register = () => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,16 +23,22 @@ const Register = () => {
     setFormData(allValues);
   };
 
-  const { email, password, confirm, name, agreement } = formData;
-
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    console.log('Received values of form: ', values);
-    // MAKE POST REQUEST
+    const { email, password, confirm, name, agreement } = values;
+
+    console.log({ email, password, confirm, name, agreement });
+
+    if (password !== confirm) {
+      setAlert('Passwords do not match', 'error');
+    } else if (!agreement) {
+      setAlert('You have to accept the agreement', 'error');
+    } else {
+      register({ name, email, password });
+    }
   };
 
-  const showAgreement = () => setShowModal(true);
   const showAgreementAction = () => setShowModal(false);
 
   return (
@@ -148,6 +158,7 @@ const Register = () => {
         visible={showModal}
         onOk={showAgreementAction}
         onCancel={showAgreementAction}
+        cancelButtonProps={{ style: { display: 'none' } }}
         maskClosable
       >
         <p>
@@ -192,4 +203,9 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
+};
+
+export default connect(null, { setAlert, register })(Register);
