@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Tooltip, Checkbox, Button, Modal } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Form, Input, Button } from 'antd';
 
 import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
+import { login } from '../../actions/auth';
 
-const Register = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirm: '',
-    name: '',
-    agreement: ''
-  });
+const Login = ({ login, isAuthenticated }) => {
+  // const [formData, setFormData] = useState({
+  //   email: '',
+  //   password: '',
+  // });
 
-  const onValuesChange = (changedValues, allValues) => {
-    setFormData(allValues);
-  };
-
-  const { email, password } = formData;
+  // const onValuesChange = (changedValues, allValues) => {
+  //   setFormData(allValues);
+  // };
 
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    console.log('Received values of form: ', values);
-    // MAKE POST REQUEST
+    const { email, password } = values;
+
+    login(email, password);
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>
@@ -38,7 +41,7 @@ const Register = () => {
         form={form}
         name="login"
         onFinish={onFinish}
-        onValuesChange={onValuesChange}
+        // onValuesChange={onValuesChange}
         scrollToFirstError
       >
         <Form.Item
@@ -83,4 +86,13 @@ const Register = () => {
   );
 };
 
-export default Register;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);
