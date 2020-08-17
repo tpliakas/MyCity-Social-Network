@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
@@ -9,26 +9,24 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
 
-const Register = ({ setAlert, register }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirm: '',
-    name: '',
-    agreement: ''
-  });
+const Register = ({ setAlert, register, isAuthenticated }) => {
+  // const [formData, setFormData] = useState({
+  //   email: '',
+  //   password: '',
+  //   confirm: '',
+  //   name: '',
+  //   agreement: ''
+  // });
   const [showModal, setShowModal] = useState(false);
 
-  const onValuesChange = (changedValues, allValues) => {
-    setFormData(allValues);
-  };
+  // const onValuesChange = (changedValues, allValues) => {
+  //   setFormData(allValues);
+  // };
 
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     const { email, password, confirm, name, agreement } = values;
-
-    console.log({ email, password, confirm, name, agreement });
 
     if (password !== confirm) {
       setAlert('Passwords do not match', 'error');
@@ -41,6 +39,11 @@ const Register = ({ setAlert, register }) => {
 
   const showAgreementAction = () => setShowModal(false);
 
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <>
       <h1 className="large text-primary">Sign Up</h1>
@@ -52,7 +55,7 @@ const Register = ({ setAlert, register }) => {
         form={form}
         name="register"
         onFinish={onFinish}
-        onValuesChange={onValuesChange}
+        // onValuesChange={onValuesChange}
         scrollToFirstError
       >
         <Form.Item
@@ -205,7 +208,12 @@ const Register = ({ setAlert, register }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
-export default connect(null, { setAlert, register })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

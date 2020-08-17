@@ -5,7 +5,7 @@
   --primary-color: #17a2b8;
   --primary-color-hover: #127E8F;
   --dark-color: #343a40;
-  --light-color: #f4f4f4;
+  --light-color: #e3e3e3;
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -63,6 +63,17 @@ img {
 .ant-btn:hover, .ant-btn:focus {
   color: var(--light-color);
   border-color: var(--primary-color-hover);
+}
+
+.login.ant-btn, .login.ant-btn {
+  color: var(--dark-color);
+  border-color: var(--light-color);
+}
+
+.login.ant-btn:hover, .login.ant-btn:focus {
+  color: var(--dark-color);
+  border-color: var(--light-color);
+  background: var(--light-color);
 }
 
 .ant-alert-message {
