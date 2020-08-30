@@ -8,15 +8,6 @@ import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
 import { login } from '../../actions/auth';
 
 const Login = ({ login, isAuthenticated }) => {
-  // const [formData, setFormData] = useState({
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const onValuesChange = (changedValues, allValues) => {
-  //   setFormData(allValues);
-  // };
-
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
@@ -41,7 +32,6 @@ const Login = ({ login, isAuthenticated }) => {
         form={form}
         name="login"
         onFinish={onFinish}
-        // onValuesChange={onValuesChange}
         scrollToFirstError
       >
         <Form.Item
@@ -69,7 +59,6 @@ const Login = ({ login, isAuthenticated }) => {
               message: 'Please input your password!'
             }
           ]}
-          hasFeedback
         >
           <Input.Password />
         </Form.Item>
