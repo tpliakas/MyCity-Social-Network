@@ -66,6 +66,7 @@ img {
 }
 
 .login.ant-btn, .login.ant-btn {
+  border-radius: 0;
   color: var(--dark-color);
   border-color: var(--light-color);
 }
