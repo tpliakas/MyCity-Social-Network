@@ -6,6 +6,7 @@
   --primary-color-hover: #127E8F;
   --dark-color: #343a40;
   --light-color: #e3e3e3;
+  --white-color: #fff;
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -254,6 +255,7 @@ img {
 
 .btn:hover {
   opacity: 0.8;
+  color: var(--white-color)
 }
 
 .bg-light,
@@ -375,6 +377,10 @@ button {
 
 .navbar .welcome span {
   margin-right: 0.6rem;
+}
+
+.navbar i {
+  padding-right: 0.25rem;
 }
 
 /* Landing Page */
@@ -537,6 +543,11 @@ button {
   color: #aaa;
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
+}
+
+.spinner {
+  text-align: center;
+  margin-top: 1rem;
 }
 
 /* Mobile Styles */
