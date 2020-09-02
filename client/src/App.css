@@ -22,7 +22,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
-  color: #333;
+  color: var(--dark-color);
 }
 
 h1 {
@@ -177,7 +177,7 @@ img {
 .btn {
   display: inline-block;
   background: var(--light-color);
-  color: #333;
+  color: var(--dark-color);
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -193,7 +193,7 @@ img {
   text-align: center;
   margin: 0.3rem;
   background: var(--light-color);
-  color: #333;
+  color: var(--dark-color);
 }
 
 .alert {
@@ -201,7 +201,7 @@ img {
   margin: 1rem 0;
   opacity: 0.9;
   background: var(--light-color);
-  color: #333;
+  color: var(--dark-color);
 }
 
 .btn-primary,
@@ -217,7 +217,7 @@ img {
 .badge-light,
 .alert-light {
   background: var(--light-color);
-  color: #333;
+  color: var(--dark-color);
 }
 
 .btn-dark,
@@ -249,13 +249,17 @@ img {
 .badge-white,
 .alert-white {
   background: #fff;
-  color: #333;
+  color: var(--dark-color);
   border: #ccc solid 1px;
 }
 
 .btn:hover {
   opacity: 0.8;
   color: var(--white-color)
+}
+
+.btn.btn-light:hover {
+  color: var(--dark-color)
 }
 
 .bg-light,
@@ -312,29 +316,38 @@ button {
   font: inherit;
 }
 
-.form .social-input {
+.social-input {
   display: flex;
 }
 
-.form .social-input i {
+.social-input i {
   padding: 0.5rem;
   width: 4rem;
 }
 
-.form .social-input i.fa-twitter {
+.social-input i.fa-twitter {
   color: #38a1f3;
 }
-.form .social-input i.fa-facebook {
+.social-input i.fa-facebook {
   color: #3b5998;
 }
-.form .social-input i.fa-instagram {
+.social-input i.fa-instagram {
   color: #3f729b;
 }
-.form .social-input i.fa-youtube {
+.social-input i.fa-youtube {
   color: #c4302b;
 }
-.form .social-input i.fa-linkedin {
+.social-input i.fa-linkedin {
   color: #0077b5;
+}
+
+.social-network-field {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.social-network-input {
+  min-width: 15rem
 }
 
 .table th,
