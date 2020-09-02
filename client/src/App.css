@@ -341,8 +341,13 @@ button {
   color: #0077b5;
 }
 
-.ant-form-item-control-input-content {
-  display: flex
+.social-network-field {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.social-network-input {
+  min-width: 15rem
 }
 
 .table th,

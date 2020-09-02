@@ -1,24 +1,9 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Form,
-  Input,
-  Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete
-} from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Form, Input } from 'antd';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
-
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
 
 const formItemLayout = {
   labelCol: {
@@ -57,21 +42,16 @@ const initialState = {
   instagram: ''
 };
 
-const ProfileForm = ({
+const CreateProfile = ({
   profile: { profile, loading },
   createProfile,
   getCurrentProfile,
   history
 }) => {
   const [form] = Form.useForm();
-
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
-
   const [formData, setFormData] = useState(initialState);
-
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+  const [sendData, setSendData] = useState(false);
 
   useEffect(() => {
     if (!profile) getCurrentProfile();
@@ -89,27 +69,41 @@ const ProfileForm = ({
     }
   }, [loading, getCurrentProfile, profile]);
 
-  const {
-    company,
-    website,
-    location,
-    status,
-    skills,
-    bio,
-    twitter,
-    facebook,
-    linkedin,
-    youtube,
-    instagram
-  } = formData;
-
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    createProfile(formData, history, profile ? true : false);
+  const onFinish = (values) => {
+    const {
+      company,
+      website,
+      location,
+      status,
+      skills,
+      bio,
+      twitter,
+      facebook,
+      linkedin,
+      youtube,
+      instagram
+    } = values;
+    setFormData({
+      ...formData,
+      company,
+      website,
+      location,
+      status,
+      skills,
+      bio,
+      twitter,
+      facebook,
+      linkedin,
+      youtube,
+      instagram
+    });
+    setSendData(true);
   };
+
+  useEffect(() => {
+    console.log({ formData });
+    if (sendData) createProfile(formData, history, !!profile);
+  }, [sendData]);
 
   return (
     <>
@@ -195,40 +189,66 @@ const ProfileForm = ({
 
         {displaySocialInputs && (
           <>
-            <Form.Item name="twitter">
+            <div className="social-network-field">
               <div className="form-group social-input">
                 <i className="fab fa-twitter fa-2x" />
               </div>
-              <Input placeholder="Twitter URL" />
-            </Form.Item>
-            <Form.Item name="facebook">
+              <Form.Item name="twitter">
+                <Input
+                  placeholder="Twitter URL"
+                  className="social-network-input"
+                />
+              </Form.Item>
+            </div>
+            <div className="social-network-field">
               <div className="form-group social-input">
                 <i className="fab fa-facebook fa-2x" />
               </div>
-              <Input placeholder="Facebook URL" />
-            </Form.Item>
-            <Form.Item name="youtube">
+              <Form.Item name="facebook">
+                <Input
+                  placeholder="Facebook URL"
+                  className="social-network-input"
+                />
+              </Form.Item>
+            </div>
+            <div className="social-network-field">
               <div className="form-group social-input">
                 <i className="fab fa-youtube fa-2x" />
               </div>
-              <Input placeholder="Youtube URL" />
-            </Form.Item>
-            <Form.Item name="linkedin">
+
+              <Form.Item name="youtube">
+                <Input
+                  placeholder="Youtube URL"
+                  className="social-network-input"
+                />
+              </Form.Item>
+            </div>
+            <div className="social-network-field">
               <div className="form-group social-input">
                 <i className="fab fa-linkedin fa-2x" />
               </div>
-              <Input placeholder="Linkedin URL" />
-            </Form.Item>
-            <Form.Item name="instagram">
+              <Form.Item name="linkedin">
+                <Input
+                  placeholder="Linkedin URL"
+                  className="social-network-input"
+                />
+              </Form.Item>
+            </div>
+            <div className="social-network-field">
               <div className="form-group social-input">
                 <i className="fab fa-instagram fa-2x" />
               </div>
-              <Input placeholder="Instagram URL" />
-            </Form.Item>
+              <Form.Item name="instagram">
+                <Input
+                  placeholder="Instagram URL"
+                  className="social-network-input"
+                />
+              </Form.Item>
+            </div>
           </>
         )}
+        <input type="submit" className="btn btn-primary my-1" value="Submit" />
       </Form>
-      <input type="submit" className="btn btn-primary my-1" value="Submit" />
       <Link className="btn btn-light my-1" to="/dashboard">
         Go Back
       </Link>
@@ -236,7 +256,7 @@ const ProfileForm = ({
   );
 };
 
-ProfileForm.propTypes = {
+CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
@@ -247,5 +267,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  ProfileForm
+  withRouter(CreateProfile)
 );

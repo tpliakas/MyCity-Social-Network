@@ -55,7 +55,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         form={form}
         name="register"
         onFinish={onFinish}
-        // onValuesChange={onValuesChange}
         scrollToFirstError
       >
         <Form.Item
