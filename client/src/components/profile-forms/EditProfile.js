@@ -42,8 +42,8 @@ const initialState = {
   instagram: ''
 };
 
-const CreateProfile = ({
-  profile: { profile },
+const EditProfile = ({
+  profile: { profile, loading },
   createProfile,
   getCurrentProfile,
   history
@@ -53,9 +53,21 @@ const CreateProfile = ({
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
   const [sendData, setSendData] = useState(false);
 
-  useEffect(() => {
-    if (!profile) getCurrentProfile();
-  }, [getCurrentProfile, profile]);
+  // useEffect(() => {
+  //   if (!profile) getCurrentProfile();
+  //   if (!loading && profile) {
+  //     const profileData = { ...initialState };
+  //     for (const key in profile) {
+  //       if (key in profileData) profileData[key] = profile[key];
+  //     }
+  //     for (const key in profile.social) {
+  //       if (key in profileData) profileData[key] = profile.social[key];
+  //     }
+  //     if (Array.isArray(profileData.skills))
+  //       profileData.skills = profileData.skills.join(', ');
+  //     setFormData(profileData);
+  //   }
+  // }, [loading, getCurrentProfile, profile]);
 
   const onFinish = (values) => {
     const {
@@ -92,8 +104,31 @@ const CreateProfile = ({
     if (sendData) createProfile(formData, history, !!profile);
   }, [sendData]);
 
+  useEffect(() => {
+    getCurrentProfile();
+
+    setFormData({
+      company: loading || !profile.company ? '' : profile.company,
+      website: loading || !profile.website ? '' : profile.website,
+      location: loading || !profile.location ? '' : profile.location,
+      status: loading || !profile.status ? '' : profile.status,
+      skills: loading || !profile.skills ? '' : profile.skills.join(','),
+      bio: loading || !profile.bio ? '' : profile.bio,
+      twitter: loading || !profile.twitter ? '' : profile.twitter,
+      facebook: loading || !profile.facebook ? '' : profile.facebook,
+      linkedin: loading || !profile.linkedin ? '' : profile.linkedin,
+      youtube: loading || !profile.youtube ? '' : profile.youtube,
+      instagram: loading || !profile.instagram ? '' : profile.instagram
+    });
+
+    form.setFieldsValue(formData);
+  }, [loading]);
+
+  useEffect(() => form.resetFields(), [formData]);
+
   return (
     <>
+      {console.log(formData)}
       <h1 className="large text-primary">Edit Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user" /> Add some changes to your profile
@@ -101,9 +136,9 @@ const CreateProfile = ({
       <Form
         {...formItemLayout}
         form={form}
-        name="create-profile"
+        name="edit-profile"
         onFinish={onFinish}
-        initialValues={initialState}
+        initialValues={formData}
         scrollToFirstError
       >
         <Form.Item
@@ -243,7 +278,7 @@ const CreateProfile = ({
   );
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
@@ -254,5 +289,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  withRouter(CreateProfile)
+  withRouter(EditProfile)
 );
