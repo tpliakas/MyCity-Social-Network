@@ -5,35 +5,34 @@ import { connect } from 'react-redux';
 import { addExperience } from '../../actions/profile';
 import { Checkbox, DatePicker, Form, Input } from 'antd';
 
-const { RangePicker } = DatePicker;
-
 const layout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 12 }
 };
 
+const initialState = {
+  company: '',
+  title: '',
+  location: '',
+  from: '',
+  to: '',
+  current: false,
+  description: ''
+};
+
 const AddExperience = ({ addExperience, history }) => {
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState({
-    company: '',
-    title: '',
-    location: '',
-    from: '',
-    to: '',
-    current: false,
-    description: ''
-  });
   const [isCurrent, setIsCurrent] = useState(false);
-
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleChangeCurrent = (e) => setIsCurrent(e.target.checked);
 
   const onFinish = (values) => {
     const { company, title, location, from, to, current, description } = values;
-
     console.log({ values });
+    addExperience(
+      { company, title, location, from, to, current, description },
+      history
+    );
   };
 
   return (
@@ -82,7 +81,16 @@ const AddExperience = ({ addExperience, history }) => {
         <Form.Item name="location" label="Location">
           <Input />
         </Form.Item>
-        <Form.Item name="from" label="From Date">
+        <Form.Item
+          name="from"
+          label="From Date"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your From Date!'
+            }
+          ]}
+        >
           <DatePicker />
         </Form.Item>
         <Form.Item name="current" label="Current">
