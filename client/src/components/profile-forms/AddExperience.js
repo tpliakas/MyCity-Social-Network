@@ -28,7 +28,6 @@ const AddExperience = ({ addExperience, history }) => {
 
   const onFinish = (values) => {
     const { company, title, location, from, to, current, description } = values;
-    console.log({ values });
     addExperience(
       { company, title, location, from, to, current, description },
       history
