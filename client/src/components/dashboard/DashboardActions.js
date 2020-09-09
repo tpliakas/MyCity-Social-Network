@@ -17,7 +17,7 @@ const DashboardActions = () => {
       <br />
       <br />
       <Tooltip title="Create new issue regarding a city">
-        <Link to="/add-education" className="btn btn-primary">
+        <Link to="/add-issue" className="btn btn-primary">
           <i className="fas fa-ticket-alt" /> Add New Ticket
         </Link>
       </Tooltip>

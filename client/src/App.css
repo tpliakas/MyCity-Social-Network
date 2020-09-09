@@ -9,6 +9,7 @@
   --white-color: #fff;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --red-color: #ff4d4f;
 }
 
 * {
@@ -315,6 +316,10 @@ img {
 .form input[type='submit'],
 button {
   font: inherit;
+}
+
+.red {
+  color: var(--red-color)
 }
 
 .social-input {
