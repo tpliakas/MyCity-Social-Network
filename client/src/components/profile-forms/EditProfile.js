@@ -128,7 +128,6 @@ const EditProfile = ({
 
   return (
     <>
-      {console.log(formData)}
       <h1 className="large text-primary">Edit Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user" /> Add some changes to your profile

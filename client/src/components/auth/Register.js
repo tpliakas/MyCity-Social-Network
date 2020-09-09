@@ -10,18 +10,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
-  // const [formData, setFormData] = useState({
-  //   email: '',
-  //   password: '',
-  //   confirm: '',
-  //   name: '',
-  //   agreement: ''
-  // });
   const [showModal, setShowModal] = useState(false);
-
-  // const onValuesChange = (changedValues, allValues) => {
-  //   setFormData(allValues);
-  // };
 
   const [form] = Form.useForm();
 
