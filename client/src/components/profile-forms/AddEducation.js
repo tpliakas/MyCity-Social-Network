@@ -1,47 +1,59 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Checkbox, DatePicker, Form, Input } from 'antd';
 import { addEducation } from '../../actions/profile';
 
+const layout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 12 }
+};
+
+const initialState = {
+  school: '',
+  degree: '',
+  fieldofstudy: '',
+  from: '',
+  to: '',
+  current: false,
+  description: ''
+};
+
 const AddEducation = ({ addEducation, history }) => {
-  const [formData, setFormData] = useState({
-    school: '',
-    degree: '',
-    fieldofstudy: '',
-    from: '',
-    to: '',
-    current: false,
-    description: ''
-  });
+  const [form] = Form.useForm();
+  const [isCurrent, setIsCurrent] = useState(false);
 
-  const {
-    school,
-    degree,
-    fieldofstudy,
-    from,
-    to,
-    description,
-    current
-  } = formData;
+  const handleChangeCurrent = (e) => setIsCurrent(e.target.checked);
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onFinish = (values) => {
+    const {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      description,
+      current
+    } = values;
+    addEducation(
+      { school, degree, fieldofstudy, from, to, description, current },
+      history
+    );
+  };
 
   return (
-    <Fragment>
+    <>
       <h1 className="large text-primary">Add Your Education</h1>
-      <p className="lead">
-        <i className="fas fa-code-branch" /> Add any school or bootcamp that you
-        have attended
-      </p>
+      <p className="lead">Add any school or bootcamp that you have attended</p>
       <small>* = required field</small>
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          addEducation(formData, history);
-        }}
+      <Form
+        {...layout}
+        form={form}
+        name="add-education"
+        onFinish={onFinish}
+        initialValues={initialState}
+        scrollToFirstError
       >
         <div className="form-group">
           <input
@@ -108,12 +120,12 @@ const AddEducation = ({ addEducation, history }) => {
             onChange={onChange}
           />
         </div>
-        <input type="submit" className="btn btn-primary my-1" />
+        <input type="submit" className="btn btn-primary my-1" value="Submit" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
         </Link>
-      </form>
-    </Fragment>
+      </Form>
+    </>
   );
 };
 

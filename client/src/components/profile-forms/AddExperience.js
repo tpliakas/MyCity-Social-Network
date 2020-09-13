@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addExperience } from '../../actions/profile';
 import { Checkbox, DatePicker, Form, Input } from 'antd';
+import { addExperience } from '../../actions/profile';
 
 const layout = {
   labelCol: { span: 4 },
@@ -35,7 +35,7 @@ const AddExperience = ({ addExperience, history }) => {
   };
 
   return (
-    <Fragment>
+    <>
       <h1 className="large text-primary">Add An Experience</h1>
       <p className="lead">
         Add any job positions that you have had in the past
@@ -46,7 +46,7 @@ const AddExperience = ({ addExperience, history }) => {
       <Form
         {...layout}
         form={form}
-        name="create-profile"
+        name="add-experience"
         onFinish={onFinish}
         initialValues={initialState}
         scrollToFirstError
@@ -108,7 +108,7 @@ const AddExperience = ({ addExperience, history }) => {
           Go Back
         </Link>
       </Form>
-    </Fragment>
+    </>
   );
 };
 
