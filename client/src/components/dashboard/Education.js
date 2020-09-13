@@ -1,26 +1,28 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { deleteExperience } from '../../actions/profile';
+import { deleteEducation } from '../../actions/profile';
+import { dateFormat } from '../../utils/other';
 
-const Experience = ({ experience, deleteExperience }) => {
-  const experiences = experience.map((exp) => (
-    <tr key={exp._id}>
-      <td>{exp.company}</td>
-      <td className="hide-sm">{exp.title}</td>
+const Education = ({ education, deleteEducation }) => {
+  const educations = education.map((edu) => (
+    <tr key={edu._id}>
+      <td>{edu.school}</td>
+      <td className="hide-sm">{edu.fieldofstudy}</td>
+      <td className="hide-sm">{edu.degree}</td>
       <td>
-        <Moment format="YYYY/MM/DD">{moment.utc(exp.from)}</Moment> -{' '}
-        {exp.to === null ? (
+        <Moment format={dateFormat}>{moment(edu.from)}</Moment> -{' '}
+        {!edu.to ? (
           ' Now'
         ) : (
-          <Moment format="YYYY/MM/DD">{moment.utc(exp.to)}</Moment>
+          <Moment format={dateFormat}>{moment(edu.to)}</Moment>
         )}
       </td>
       <td>
         <button
-          onClick={() => deleteExperience(exp._id)}
+          onClick={() => deleteEducation(edu._id)}
           className="btn btn-danger"
         >
           Delete
@@ -30,26 +32,27 @@ const Experience = ({ experience, deleteExperience }) => {
   ));
 
   return (
-    <Fragment>
-      <h2 className="my-2">Experience Credentials</h2>
+    <>
+      <h2 className="my-2">Education Credentials</h2>
       <table className="table">
         <thead>
           <tr>
-            <th>Company</th>
-            <th className="hide-sm">Title</th>
+            <th>School</th>
+            <th className="hide-sm">Field of Study</th>
+            <th className="hide-sm">Degree</th>
             <th className="hide-sm">Years</th>
             <th />
           </tr>
         </thead>
-        <tbody>{experiences}</tbody>
+        <tbody>{educations}</tbody>
       </table>
-    </Fragment>
+    </>
   );
 };
 
-Experience.propTypes = {
-  experience: PropTypes.array.isRequired,
-  deleteExperience: PropTypes.func.isRequired
+Education.propTypes = {
+  education: PropTypes.array.isRequired,
+  deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteExperience })(Experience);
+export default connect(null, { deleteEducation })(Education);

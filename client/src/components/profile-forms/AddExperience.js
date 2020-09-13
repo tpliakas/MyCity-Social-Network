@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Checkbox, DatePicker, Form, Input } from 'antd';
 import { addExperience } from '../../actions/profile';
-
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 12 }
-};
+import { dateFormat, layout } from '../../utils/other';
 
 const initialState = {
   company: '',
@@ -90,14 +86,14 @@ const AddExperience = ({ addExperience, history }) => {
             }
           ]}
         >
-          <DatePicker />
+          <DatePicker format={dateFormat} />
         </Form.Item>
         <Form.Item name="current" label="Current">
           <Checkbox onChange={handleChangeCurrent} />
         </Form.Item>
         {!isCurrent && (
           <Form.Item name="to" label="To Date">
-            <DatePicker />
+            <DatePicker format={dateFormat} />
           </Form.Item>
         )}
         <Form.Item name="description" label="Description">
