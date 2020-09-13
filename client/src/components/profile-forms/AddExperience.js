@@ -1,14 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addExperience } from '../../actions/profile';
 import { Checkbox, DatePicker, Form, Input } from 'antd';
-
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 12 }
-};
+import { addExperience } from '../../actions/profile';
+import { dateFormat, layout } from '../../utils/other';
 
 const initialState = {
   company: '',
@@ -35,7 +31,7 @@ const AddExperience = ({ addExperience, history }) => {
   };
 
   return (
-    <Fragment>
+    <>
       <h1 className="large text-primary">Add An Experience</h1>
       <p className="lead">
         Add any job positions that you have had in the past
@@ -46,7 +42,7 @@ const AddExperience = ({ addExperience, history }) => {
       <Form
         {...layout}
         form={form}
-        name="create-profile"
+        name="add-experience"
         onFinish={onFinish}
         initialValues={initialState}
         scrollToFirstError
@@ -70,7 +66,7 @@ const AddExperience = ({ addExperience, history }) => {
           rules={[
             {
               required: true,
-              message: 'Please input your Job title!',
+              message: 'Please input your company!',
               whitespace: true
             }
           ]}
@@ -90,14 +86,14 @@ const AddExperience = ({ addExperience, history }) => {
             }
           ]}
         >
-          <DatePicker />
+          <DatePicker format={dateFormat} />
         </Form.Item>
         <Form.Item name="current" label="Current">
           <Checkbox onChange={handleChangeCurrent} />
         </Form.Item>
         {!isCurrent && (
           <Form.Item name="to" label="To Date">
-            <DatePicker />
+            <DatePicker format={dateFormat} />
           </Form.Item>
         )}
         <Form.Item name="description" label="Description">
@@ -108,7 +104,7 @@ const AddExperience = ({ addExperience, history }) => {
           Go Back
         </Link>
       </Form>
-    </Fragment>
+    </>
   );
 };
 

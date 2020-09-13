@@ -1,119 +1,116 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Checkbox, DatePicker, Form, Input } from 'antd';
 import { addEducation } from '../../actions/profile';
+import { dateFormat, layout } from '../../utils/other';
+
+const initialState = {
+  school: '',
+  degree: '',
+  fieldofstudy: '',
+  from: '',
+  to: '',
+  current: false,
+  description: ''
+};
 
 const AddEducation = ({ addEducation, history }) => {
-  const [formData, setFormData] = useState({
-    school: '',
-    degree: '',
-    fieldofstudy: '',
-    from: '',
-    to: '',
-    current: false,
-    description: ''
-  });
+  const [form] = Form.useForm();
+  const [isCurrent, setIsCurrent] = useState(false);
 
-  const {
-    school,
-    degree,
-    fieldofstudy,
-    from,
-    to,
-    description,
-    current
-  } = formData;
+  const handleChangeCurrent = (e) => setIsCurrent(e.target.checked);
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onFinish = (values) => {
+    const {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      description,
+      current
+    } = values;
+    addEducation(
+      { school, degree, fieldofstudy, from, to, description, current },
+      history
+    );
+  };
 
   return (
-    <Fragment>
+    <>
       <h1 className="large text-primary">Add Your Education</h1>
-      <p className="lead">
-        <i className="fas fa-code-branch" /> Add any school or bootcamp that you
-        have attended
-      </p>
-      <small>* = required field</small>
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          addEducation(formData, history);
-        }}
+      <p className="lead">Add any school or bootcamp that you have attended</p>
+      <small>
+        <span className="red">*</span> = required field
+      </small>
+      <Form
+        {...layout}
+        form={form}
+        name="add-education"
+        onFinish={onFinish}
+        initialValues={initialState}
+        scrollToFirstError
       >
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="* School or Bootcamp"
-            name="school"
-            value={school}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="* Degree or Certificate"
-            name="degree"
-            value={degree}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Field of Study"
-            name="fieldofstudy"
-            value={fieldofstudy}
-            onChange={onChange}
-          />
-        </div>
-        <div className="form-group">
-          <h4>From Date</h4>
-          <input type="date" name="from" value={from} onChange={onChange} />
-        </div>
-        <div className="form-group">
-          <p>
-            <input
-              type="checkbox"
-              name="current"
-              checked={current}
-              value={current}
-              onChange={() => setFormData({ ...formData, current: !current })}
-            />{' '}
-            Current School
-          </p>
-        </div>
-        <div className="form-group">
-          <h4>To Date</h4>
-          <input
-            type="date"
-            name="to"
-            value={to}
-            onChange={onChange}
-            disabled={current}
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            name="description"
-            cols="30"
-            rows="5"
-            placeholder="Program Description"
-            value={description}
-            onChange={onChange}
-          />
-        </div>
-        <input type="submit" className="btn btn-primary my-1" />
+        <Form.Item
+          name="school"
+          label="School or Bootcamp"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your school or bootcamp!',
+              whitespace: true
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="degree"
+          label="Degree or Certificate"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your degree or certificate!',
+              whitespace: true
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item name="fieldofstudy" label="Field of Study">
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="from"
+          label="From Date"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your From Date!'
+            }
+          ]}
+        >
+          <DatePicker format={dateFormat} />
+        </Form.Item>
+        <Form.Item name="current" label="Current">
+          <Checkbox onChange={handleChangeCurrent} />
+        </Form.Item>
+        {!isCurrent && (
+          <Form.Item name="to" label="To Date">
+            <DatePicker format={dateFormat} />
+          </Form.Item>
+        )}
+        <Form.Item name="description" label="Program Description">
+          <Input.TextArea />
+        </Form.Item>
+        <input type="submit" className="btn btn-primary my-1" value="Submit" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
         </Link>
-      </form>
-    </Fragment>
+      </Form>
+    </>
   );
 };
 

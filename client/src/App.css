@@ -170,6 +170,7 @@ img {
 }
 .my-2 {
   margin: 2rem 0;
+  font-weight: 600;
 }
 .my-3 {
   margin: 3rem 0;
@@ -364,6 +365,7 @@ button {
 
 .table th {
   background: var(--light-color);
+  border-right: 2px solid var(--white-color);
 }
 
 /* Navbar */
@@ -511,24 +513,6 @@ button {
   margin: 0.5rem 0;
 }
 
-.profile-github {
-  grid-area: github;
-}
-
-.profile-github .repo {
-  display: flex;
-}
-
-.profile-github .repo > div:first-child {
-  flex: 7;
-  flex-basis: 70%;
-}
-
-.profile-github > div:last-child {
-  flex: 3;
-  flex-basis: 20%;
-}
-
 /* Posts Page */
 .post-form .post-form-header {
   background: var(--primary-color);
@@ -567,6 +551,12 @@ button {
 .spinner {
   text-align: center;
   margin-top: 1rem;
+}
+
+.dash-buttons {
+  padding-bottom: 1rem;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--light-color);
 }
 
 /* Mobile Styles */
