@@ -46,7 +46,9 @@ const AddEducation = ({ addEducation, history }) => {
     <>
       <h1 className="large text-primary">Add Your Education</h1>
       <p className="lead">Add any school or bootcamp that you have attended</p>
-      <small>* = required field</small>
+      <small>
+        <span className="red">*</span> = required field
+      </small>
       <Form
         {...layout}
         form={form}
@@ -55,71 +57,58 @@ const AddEducation = ({ addEducation, history }) => {
         initialValues={initialState}
         scrollToFirstError
       >
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="* School or Bootcamp"
-            name="school"
-            value={school}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="* Degree or Certificate"
-            name="degree"
-            value={degree}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Field of Study"
-            name="fieldofstudy"
-            value={fieldofstudy}
-            onChange={onChange}
-          />
-        </div>
-        <div className="form-group">
-          <h4>From Date</h4>
-          <input type="date" name="from" value={from} onChange={onChange} />
-        </div>
-        <div className="form-group">
-          <p>
-            <input
-              type="checkbox"
-              name="current"
-              checked={current}
-              value={current}
-              onChange={() => setFormData({ ...formData, current: !current })}
-            />{' '}
-            Current School
-          </p>
-        </div>
-        <div className="form-group">
-          <h4>To Date</h4>
-          <input
-            type="date"
-            name="to"
-            value={to}
-            onChange={onChange}
-            disabled={current}
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            name="description"
-            cols="30"
-            rows="5"
-            placeholder="Program Description"
-            value={description}
-            onChange={onChange}
-          />
-        </div>
+        <Form.Item
+          name="school"
+          label="School or Bootcamp"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your school or bootcamp!',
+              whitespace: true
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="degree"
+          label="Degree or Certificate"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your degree or certificate!',
+              whitespace: true
+            }
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item name="fieldofstudy" label="Field of Study">
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="from"
+          label="From Date"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your From Date!'
+            }
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
+        <Form.Item name="current" label="Current">
+          <Checkbox onChange={handleChangeCurrent} />
+        </Form.Item>
+        {!isCurrent && (
+          <Form.Item name="to" label="To Date">
+            <DatePicker />
+          </Form.Item>
+        )}
+        <Form.Item name="description" label="Program Description">
+          <Input.TextArea />
+        </Form.Item>
         <input type="submit" className="btn btn-primary my-1" value="Submit" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back

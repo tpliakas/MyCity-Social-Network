@@ -70,7 +70,7 @@ const AddExperience = ({ addExperience, history }) => {
           rules={[
             {
               required: true,
-              message: 'Please input your Job title!',
+              message: 'Please input your company!',
               whitespace: true
             }
           ]}
