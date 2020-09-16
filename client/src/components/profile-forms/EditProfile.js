@@ -74,7 +74,8 @@ const EditProfile = ({
 
   useEffect(() => {
     if (sendData) createProfile(formData, history, !!profile);
-  }, [createProfile, formData, history, profile, sendData]);
+    // eslint-disable-next-line
+  }, [sendData]);
 
   useEffect(() => {
     getCurrentProfile();
@@ -94,9 +95,14 @@ const EditProfile = ({
     });
 
     form.setFieldsValue(formData);
-  }, [profile, form, formData, getCurrentProfile, loading]);
+    // eslint-disable-next-line
+  }, [getCurrentProfile, loading]);
 
-  useEffect(() => form.resetFields(), [form, formData]);
+  useEffect(
+    () => form.resetFields(),
+    // eslint-disable-next-line
+    [formData]
+  );
 
   return (
     <>

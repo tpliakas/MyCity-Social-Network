@@ -19,7 +19,7 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -67,7 +67,7 @@ img {
   border-color: var(--primary-color-hover);
 }
 
-.login.ant-btn, .login.ant-btn {
+.login.ant-btn {
   border-radius: 0;
   color: var(--dark-color);
   border-color: var(--light-color);

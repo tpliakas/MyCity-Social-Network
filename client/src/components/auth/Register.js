@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { setAlert } from '../../actions/alert';
-import { register } from '../../actions/auth';
+import { setAlert as setAlertAction } from '../../actions/alert';
+import { register as registerAction } from '../../actions/auth';
 import { Form, Input, Tooltip, Checkbox, Button, Modal } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
@@ -207,4 +207,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlertAction, registerAction })(
+  Register
+);
