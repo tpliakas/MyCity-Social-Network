@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { deleteEducation } from '../../actions/profile';
+import { deleteEducation as deleteEducationAction } from '../../actions/profile';
 import { dateFormat } from '../../utils/other';
 
 const Education = ({ education, deleteEducation }) => {
@@ -55,4 +55,4 @@ Education.propTypes = {
   deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteEducation })(Education);
+export default connect(null, { deleteEducationAction })(Education);
