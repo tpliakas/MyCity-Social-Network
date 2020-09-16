@@ -15,18 +15,6 @@ const formItemLayout = {
     sm: { span: 16 }
   }
 };
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 16,
-      offset: 8
-    }
-  }
-};
 
 const initialState = {
   company: '',
@@ -52,22 +40,6 @@ const EditProfile = ({
   const [formData, setFormData] = useState(initialState);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
   const [sendData, setSendData] = useState(false);
-
-  // useEffect(() => {
-  //   if (!profile) getCurrentProfile();
-  //   if (!loading && profile) {
-  //     const profileData = { ...initialState };
-  //     for (const key in profile) {
-  //       if (key in profileData) profileData[key] = profile[key];
-  //     }
-  //     for (const key in profile.social) {
-  //       if (key in profileData) profileData[key] = profile.social[key];
-  //     }
-  //     if (Array.isArray(profileData.skills))
-  //       profileData.skills = profileData.skills.join(', ');
-  //     setFormData(profileData);
-  //   }
-  // }, [loading, getCurrentProfile, profile]);
 
   const onFinish = (values) => {
     const {
@@ -102,6 +74,7 @@ const EditProfile = ({
 
   useEffect(() => {
     if (sendData) createProfile(formData, history, !!profile);
+    // eslint-disable-next-line
   }, [sendData]);
 
   useEffect(() => {
@@ -122,9 +95,14 @@ const EditProfile = ({
     });
 
     form.setFieldsValue(formData);
-  }, [loading]);
+    // eslint-disable-next-line
+  }, [getCurrentProfile, loading]);
 
-  useEffect(() => form.resetFields(), [formData]);
+  useEffect(
+    () => form.resetFields(),
+    // eslint-disable-next-line
+    [formData]
+  );
 
   return (
     <>
