@@ -135,7 +135,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           {...tailFormItemLayout}
         >
           <Checkbox>
-            I have read the <a onClick={() => setShowModal(true)}>agreement</a>
+            I have read the{' '}
+            <a href="#0" onClick={() => setShowModal(true)}>
+              agreement
+            </a>
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>

@@ -78,7 +78,7 @@ const CreateProfile = ({
 
   useEffect(() => {
     if (sendData) createProfile(formData, history, !!profile);
-  }, [sendData]);
+  }, [createProfile, formData, history, profile, sendData]);
 
   return (
     <>
