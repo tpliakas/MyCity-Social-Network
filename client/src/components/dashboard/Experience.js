@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { deleteExperience as deleteExperienceAction } from '../../actions/profile';
+import { deleteExperience } from '../../actions/profile';
 import { dateFormat } from '../../utils/other';
 
 const Experience = ({ experience, deleteExperience }) => {
@@ -55,4 +55,4 @@ Experience.propTypes = {
   deleteExperience: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteExperienceAction })(Experience);
+export default connect(null, { deleteExperience })(Experience);
