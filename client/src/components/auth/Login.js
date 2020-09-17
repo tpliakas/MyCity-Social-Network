@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, Input, Button } from 'antd';
 
 import { formItemLayout, tailFormItemLayout } from './formLayoutSpan';
-import { login as loginAction } from '../../actions/auth';
+import { login } from '../../actions/auth';
 
 const Login = ({ login, isAuthenticated }) => {
   const [form] = Form.useForm();
@@ -84,4 +84,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { loginAction })(Login);
+export default connect(mapStateToProps, { login })(Login);
