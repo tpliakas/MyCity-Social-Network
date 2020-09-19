@@ -31,6 +31,10 @@ h1 {
   margin: 0
 }
 
+h1.large {
+  color: var(--white-color);
+}
+
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -262,11 +266,6 @@ img {
 
 .btn.btn-light:hover {
   color: var(--dark-color)
-}
-
-.bg-light,
-.badge-light {
-  border: #ccc solid 1px;
 }
 
 .round-img {
