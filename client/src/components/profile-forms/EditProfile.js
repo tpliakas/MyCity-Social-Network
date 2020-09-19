@@ -101,9 +101,6 @@ const EditProfile = ({
     // eslint-disable-next-line
   }, [loading]);
 
-  console.log({ profile });
-  console.log({ formData });
-
   useEffect(
     () => form.resetFields(),
     // eslint-disable-next-line
