@@ -9,5 +9,10 @@
 $ yarn
 $ yarn dev
 ```
+Or use npm:
+```sh
+$ npm install
+$ npm run dev
+```
  *<sub>Starts both **backend** and **frontend** and opens the project on default browser (dev mode atm).<sub>*
  *<sub>localhost:3000<sub>*
