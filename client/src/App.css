@@ -558,6 +558,9 @@ button {
   border-bottom: 1px solid var(--light-color);
 }
 
+/* Not Pound Page */
+
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
