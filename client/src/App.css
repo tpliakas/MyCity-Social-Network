@@ -35,6 +35,10 @@ h1.large {
   color: var(--white-color);
 }
 
+.bg-primary h3 {
+  color: var(--white-color);
+}
+
 a {
   color: var(--primary-color);
   text-decoration: none;
