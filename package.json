@@ -8,7 +8,7 @@
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd client install && yarn --cwd client build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": "https://github.com/tpliakas/thesis.git",
   "author": "Theodore Pliakas",
