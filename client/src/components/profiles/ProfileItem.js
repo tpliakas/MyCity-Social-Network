@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Tag } from 'antd';
 
 const ProfileItem = ({
   profile: {
@@ -27,7 +28,7 @@ const ProfileItem = ({
       <ul>
         {skills.slice(0, 4).map((skill, i) => (
           <li key={i} className="text-primary">
-            <i className="fas fa-check" /> {skill}
+            <Tag color="#17a2b8">{skill}</Tag>
           </li>
         ))}
       </ul>

@@ -52,7 +52,7 @@ const Profile = ({
                 </>
               ) : (
                 <h4>
-                  <strong>No experience credentials</strong>
+                  <strong>No experience</strong>
                 </h4>
               )}
             </div>
@@ -70,7 +70,7 @@ const Profile = ({
                 </>
               ) : (
                 <h4>
-                  <strong>No education credentials</strong>
+                  <strong>No education</strong>
                 </h4>
               )}
             </div>
