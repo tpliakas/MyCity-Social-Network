@@ -8,7 +8,7 @@ const app = express();
 connectDB();
 
 // Init Middleware. Helps to get body data in request
-app.use(express.json({ extended: false }));
+app.use(express.json());
 
 // Define routes
 app.use('/api/users', require('./routes/api/users'));
