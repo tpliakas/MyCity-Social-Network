@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Tag } from 'antd';
 
 const ProfileAbout = ({
   profile: {
@@ -20,7 +21,7 @@ const ProfileAbout = ({
     <div className="skills">
       {skills.map((skill, index) => (
         <div key={index} className="p-1">
-          <i className="fas fa-check" /> {skill}
+          <Tag color="#17a2b8">{skill}</Tag>
         </div>
       ))}
     </div>
