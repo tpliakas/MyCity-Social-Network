@@ -563,6 +563,21 @@ button {
   border-bottom: 1px solid var(--light-color);
 }
 
+.profiles-search {
+  margin-bottom: 2em;
+  text-align: center
+}
+
+.profiles-search .ant-btn-primary {
+  margin-right: 0
+}
+
+.ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
+  width: unset;
+  min-width: 350px;
+  max-width: 550px
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
