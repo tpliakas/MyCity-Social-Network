@@ -17,8 +17,6 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
 
   const onSearch = (value) => setSearchValue(value);
 
-  console.log({ profiles });
-
   return (
     <>
       {loading ? (
