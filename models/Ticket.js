@@ -28,6 +28,14 @@ const TicketSchema = new Schema({
       required: true
     }
   },
+  address: {
+    type: String,
+    required: true
+  },
+  addressNumber: {
+    type: String,
+    required: true
+  },
   ticketType: {
     type: String,
     required: true
