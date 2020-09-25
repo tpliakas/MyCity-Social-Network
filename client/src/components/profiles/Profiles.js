@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Input } from 'antd';
+import { motion } from 'framer-motion';
 import Spinner from '../layout/Spinner';
 import ProfileItem from './ProfileItem';
 import { getProfiles } from '../../actions/profile';
@@ -44,9 +45,31 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                       .toLowerCase()
                       .includes(searchValue.toLowerCase())
                   )
-                    return <ProfileItem key={profile._id} profile={profile} />;
+                    return (
+                      <motion.div
+                        initial={{ x: '-500px', opacity: 0 }}
+                        animate={{
+                          x: 0,
+                          opacity: 1,
+                          transition: { duration: 0.8 }
+                        }}
+                      >
+                        <ProfileItem key={profile._id} profile={profile} />
+                      </motion.div>
+                    );
                 } else {
-                  return <ProfileItem key={profile._id} profile={profile} />;
+                  return (
+                    <motion.div
+                      initial={{ x: '-500px', opacity: 0 }}
+                      animate={{
+                        x: 0,
+                        opacity: 1,
+                        transition: { duration: 0.8 }
+                      }}
+                    >
+                      <ProfileItem key={profile._id} profile={profile} />
+                    </motion.div>
+                  );
                 }
               })
             ) : (

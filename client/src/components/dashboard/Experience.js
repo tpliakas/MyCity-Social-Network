@@ -32,7 +32,7 @@ const Experience = ({ experience, deleteExperience }) => {
   ));
 
   return (
-    <>
+    <div className="dashboard-experience">
       <h2 className="my-2">Experience</h2>
       <table className="table">
         <thead>
@@ -46,7 +46,7 @@ const Experience = ({ experience, deleteExperience }) => {
         </thead>
         <tbody>{experiences}</tbody>
       </table>
-    </>
+    </div>
   );
 };
 

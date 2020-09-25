@@ -7,6 +7,7 @@ import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import { motion } from 'framer-motion';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -23,19 +24,24 @@ const Dashboard = ({
   ) : (
     <>
       <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Welcome {user && user.name}
-      </p>
       {profile !== null ? (
         <>
-          <DashboardActions />
-          <Experience experience={profile.experience} />
-          <Education education={profile.education} />
-          <div className="my-2">
-            <button className="btn btn-danger" onClick={() => deleteAccount()}>
-              <i className="fas fa-user-minus" /> Delete My Account
-            </button>
-          </div>
+          <motion.div
+            initial={{ y: '800px', opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { duration: 1.2 } }}
+          >
+            <DashboardActions name={user?.name} />
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
+            <div className="my-2">
+              <button
+                className="btn btn-danger"
+                onClick={() => deleteAccount()}
+              >
+                <i className="fas fa-user-minus" /> Delete My Account
+              </button>
+            </div>
+          </motion.div>
         </>
       ) : (
         <>

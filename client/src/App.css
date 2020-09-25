@@ -22,7 +22,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: #fafafa;
   color: var(--dark-color);
 }
 
@@ -33,6 +33,10 @@ h1 {
 
 h1.large {
   color: var(--white-color);
+}
+
+h1.large.text-primary {
+  color: var(--primary-color);
 }
 
 .bg-primary h3 {
@@ -129,6 +133,10 @@ img {
 
 .text-dark {
   color: var(--dark-color);
+}
+
+.text-white {
+  color: var(--white-color);
 }
 
 /* Padding */
@@ -314,7 +322,6 @@ img {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
-  font-weight: bold;
 }
 
 .form input[type='submit'],
@@ -376,27 +383,40 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0 2rem;
   position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
+  height: 70px
 }
 
 .navbar ul {
   display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.navbar li {
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 
 .navbar a {
   color: #fff;
   padding: 0.45rem;
   margin: 0 0.25rem;
+  height: 100%;
+  display: flex;
+  align-items: center
 }
 
 .navbar a:hover {
-  color: var(--primary-color);
+  background-color: var(--primary-color);
+  transition: all 0.3s ease
 }
 
 .navbar .welcome span {
@@ -436,9 +456,12 @@ button {
   grid-template-columns: 2fr 4fr 2fr;
   align-items: center;
   grid-gap: 2rem;
-  padding: 1rem;
+  padding: 2rem;
   line-height: 1.8;
   margin-bottom: 1rem;
+  background-color: var(--white-color);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  border-radius: 4px;
 }
 
 /* Profile Page */
@@ -488,12 +511,17 @@ button {
 
 .profile-exp {
   grid-area: exp;
-  box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.3);
 }
 
 .profile-edu {
   grid-area: edu;
-  box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.3);
+}
+
+.profile-exp, .profile-edu {
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  border: 0;
+  background-color: #fff;
+  border-radius: 4px;
 }
 
 .profile-exp h2,
@@ -517,10 +545,29 @@ button {
   margin: 0.5rem 0;
 }
 
+.dashboard-education, .dashboard-experience, .dashboard-actions {
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  padding: 12px 48px 48px;
+  margin-bottom: 3em;
+  background-color: var(--white-color);
+  border-radius: 4px;
+}
+
+.dashboard-actions {
+  padding: 10px 48px 18px
+}
+
 /* Posts Page */
-.post-form .post-form-header {
+.post-form-header {
   background: var(--primary-color);
   padding: 0.5rem;
+}
+
+.post-form {
+  background-color: var(--white-color);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  padding: 2rem;
+  border-radius: 4px;
 }
 
 .post {
@@ -555,12 +602,6 @@ button {
 .spinner {
   text-align: center;
   margin-top: 1rem;
-}
-
-.dash-buttons {
-  padding-bottom: 1rem;
-  margin-bottom: 4rem;
-  border-bottom: 1px solid var(--light-color);
 }
 
 .profiles-search {
