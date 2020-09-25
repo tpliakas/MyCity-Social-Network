@@ -384,27 +384,40 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0 2rem;
   position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
+  height: 70px
 }
 
 .navbar ul {
   display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.navbar li {
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 
 .navbar a {
   color: #fff;
   padding: 0.45rem;
   margin: 0 0.25rem;
+  height: 100%;
+  display: flex;
+  align-items: center
 }
 
 .navbar a:hover {
-  color: var(--primary-color);
+  background-color: var(--primary-color);
+  transition: all 0.3s ease
 }
 
 .navbar .welcome span {
