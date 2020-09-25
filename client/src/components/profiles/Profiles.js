@@ -47,8 +47,12 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                   )
                     return (
                       <motion.div
-                        initial={{ x: '-300px', opacity: 0 }}
-                        animate={{ x: 0, opacity: 1, duration: 2 }}
+                        initial={{ x: '-500px', opacity: 0 }}
+                        animate={{
+                          x: 0,
+                          opacity: 1,
+                          transition: { duration: 0.8 }
+                        }}
                       >
                         <ProfileItem key={profile._id} profile={profile} />
                       </motion.div>
@@ -56,8 +60,12 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                 } else {
                   return (
                     <motion.div
-                      initial={{ x: '-300px', opacity: 0 }}
-                      animate={{ x: 0, opacity: 1, duration: 2 }}
+                      initial={{ x: '-500px', opacity: 0 }}
+                      animate={{
+                        x: 0,
+                        opacity: 1,
+                        transition: { duration: 0.8 }
+                      }}
                     >
                       <ProfileItem key={profile._id} profile={profile} />
                     </motion.div>

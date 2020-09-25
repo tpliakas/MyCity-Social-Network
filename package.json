@@ -1,5 +1,5 @@
 {
-  "name": "mycitynet",
+  "name": "mycsn",
   "version": "0.0.1",
   "description": "Social network issue tracker",
   "main": "server.js",

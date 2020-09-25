@@ -322,7 +322,6 @@ img {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
-  font-weight: bold;
 }
 
 .form input[type='submit'],
@@ -462,6 +461,7 @@ button {
   margin-bottom: 1rem;
   background-color: var(--white-color);
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  border-radius: 4px;
 }
 
 /* Profile Page */
@@ -521,6 +521,7 @@ button {
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
   border: 0;
   background-color: #fff;
+  border-radius: 4px;
 }
 
 .profile-exp h2,
@@ -549,6 +550,7 @@ button {
   padding: 12px 48px 48px;
   margin-bottom: 3em;
   background-color: var(--white-color);
+  border-radius: 4px;
 }
 
 .dashboard-actions {
@@ -556,9 +558,16 @@ button {
 }
 
 /* Posts Page */
-.post-form .post-form-header {
+.post-form-header {
   background: var(--primary-color);
   padding: 0.5rem;
+}
+
+.post-form {
+  background-color: var(--white-color);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  padding: 2rem;
+  border-radius: 4px;
 }
 
 .post {

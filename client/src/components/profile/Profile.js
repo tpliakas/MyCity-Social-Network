@@ -19,6 +19,13 @@ const Profile = ({
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+
   return (
     <>
       {profile === null || loading ? (
