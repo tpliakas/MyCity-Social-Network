@@ -22,7 +22,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: #fafafa;
   color: var(--dark-color);
 }
 
@@ -33,6 +33,10 @@ h1 {
 
 h1.large {
   color: var(--white-color);
+}
+
+h1.large.text-primary {
+  color: var(--primary-color);
 }
 
 .bg-primary h3 {
@@ -129,6 +133,10 @@ img {
 
 .text-dark {
   color: var(--dark-color);
+}
+
+.text-white {
+  color: var(--white-color);
 }
 
 /* Padding */
@@ -436,9 +444,11 @@ button {
   grid-template-columns: 2fr 4fr 2fr;
   align-items: center;
   grid-gap: 2rem;
-  padding: 1rem;
+  padding: 2rem;
   line-height: 1.8;
   margin-bottom: 1rem;
+  background-color: var(--white-color);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
 }
 
 /* Profile Page */
@@ -488,12 +498,16 @@ button {
 
 .profile-exp {
   grid-area: exp;
-  box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.3);
 }
 
 .profile-edu {
   grid-area: edu;
-  box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.3);
+}
+
+.profile-exp, .profile-edu {
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  border: 0;
+  background-color: #fff;
 }
 
 .profile-exp h2,
@@ -515,6 +529,17 @@ button {
 .profile-exp p,
 .profile-edu p {
   margin: 0.5rem 0;
+}
+
+.dashboard-education, .dashboard-experience, .dashboard-actions {
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+  padding: 12px 48px 48px;
+  margin-bottom: 3em;
+  background-color: var(--white-color);
+}
+
+.dashboard-actions {
+  padding: 10px 48px 18px
 }
 
 /* Posts Page */
@@ -555,12 +580,6 @@ button {
 .spinner {
   text-align: center;
   margin-top: 1rem;
-}
-
-.dash-buttons {
-  padding-bottom: 1rem;
-  margin-bottom: 4rem;
-  border-bottom: 1px solid var(--light-color);
 }
 
 .profiles-search {

@@ -32,7 +32,7 @@ const Education = ({ education, deleteEducation }) => {
   ));
 
   return (
-    <>
+    <div className="dashboard-education">
       <h2 className="my-2">Education</h2>
       <table className="table">
         <thead>
@@ -46,7 +46,7 @@ const Education = ({ education, deleteEducation }) => {
         </thead>
         <tbody>{educations}</tbody>
       </table>
-    </>
+    </div>
   );
 };
 

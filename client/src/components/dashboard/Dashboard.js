@@ -23,12 +23,9 @@ const Dashboard = ({
   ) : (
     <>
       <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Welcome {user && user.name}
-      </p>
       {profile !== null ? (
         <>
-          <DashboardActions />
+          <DashboardActions name={user?.name} />
           <Experience experience={profile.experience} />
           <Education education={profile.education} />
           <div className="my-2">
