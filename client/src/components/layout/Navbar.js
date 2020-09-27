@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import logo from '../../img/logo-65px.png';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const location = useLocation();
+
   const authLinks = (
     <ul>
       <li>
@@ -43,12 +47,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <nav className="navbar bg-dark">
+    <nav className="navbar">
       <h1>
-        <Link to="/">
-          <i className="fas fa-city" /> MyCSN
-        </Link>
+        {location.pathname !== '/' && (
+          <Link to="/">
+            <img src={logo} alt="logo" width="65" />
+          </Link>
+        )}
       </h1>
+
       {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
     </nav>
   );

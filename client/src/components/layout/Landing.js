@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import logo from '../../img/logo.png';
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
@@ -12,10 +13,11 @@ const Landing = ({ isAuthenticated }) => {
 
   return (
     <section className="landing">
-      <div className="dark-overlay">
-        <div className="landing-inner">
+      <div className="landing-inner">
+        <img src={logo} alt="big-logo" width="200" />
+        <div className="landing-slogan">
           <motion.div
-            initial={{ x: '500px', opacity: 0 }}
+            initial={{ x: '150px', opacity: 0 }}
             animate={{ x: 0, opacity: 1, transition: { duration: 1.2 } }}
           >
             <h1 className="x-large">MyCity Social Network</h1>
@@ -24,21 +26,21 @@ const Landing = ({ isAuthenticated }) => {
               better!
             </p>
           </motion.div>
-          <motion.div
-            initial={{ x: '-500px', opacity: 0 }}
-            animate={{ x: 0, opacity: 1, transition: { duration: 1.2 } }}
-          >
-            <div className="buttons">
-              <Button type="primary" size="large">
-                <Link to="/register">Sign Up</Link>
-              </Button>
-
-              <Button type="default" size="large" className="login">
-                <Link to="/login">Login</Link>
-              </Button>
-            </div>
-          </motion.div>
         </div>
+        <motion.div
+          initial={{ x: '-150px', opacity: 0 }}
+          animate={{ x: 0, opacity: 1, transition: { duration: 1.2 } }}
+        >
+          <div className="buttons">
+            <Button type="primary" size="large">
+              <Link to="/register">Sign Up</Link>
+            </Button>
+
+            <Button type="default" size="large" className="login">
+              <Link to="/login">Login</Link>
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
