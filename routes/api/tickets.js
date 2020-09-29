@@ -3,6 +3,9 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
+const Ticket = require('../../models/Ticket');
+const User = require('../../models/User');
+
 // @route    POST api/tickets
 // @desc     Create a ticket
 // @access   Private
@@ -26,9 +29,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    // Data manipulation here
-
     try {
+      const user = await User.findById(req.user.id).select('-password');
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
