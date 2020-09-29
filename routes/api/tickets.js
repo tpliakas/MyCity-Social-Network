@@ -31,6 +31,28 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password');
+
+      const newTicket = new Ticket({
+        user: req.user.id,
+        title: req.body.title,
+        city: req.body.city,
+        area: req.body.area,
+        location: req.body.location,
+        address: req.body.address,
+        addressNumber: req.body.addressNumber,
+        ticketType: req.body.ticketType,
+        importance: req.body.importance,
+        images: req.body.images,
+        video: req.body.video,
+        status: req.body.images,
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar
+      });
+
+      const ticket = await newTicket.save();
+
+      res.json(ticket);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
