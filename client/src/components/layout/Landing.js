@@ -42,6 +42,7 @@ const Landing = ({ isAuthenticated }) => {
           </div>
         </motion.div>
       </div>
+      <div className="green-city" />
     </section>
   );
 };

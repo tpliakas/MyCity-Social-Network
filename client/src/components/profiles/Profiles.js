@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Input } from 'antd';
+import { useDebounce } from 'use-debounce';
 import { motion, AnimatePresence } from 'framer-motion';
 import Spinner from '../layout/Spinner';
 import ProfileItem from './ProfileItem';
@@ -12,6 +13,7 @@ const { Search } = Input;
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   const [searchValue, setSearchValue] = useState(null);
   const [hasProfiles, setHasProfiles] = useState(null);
+  const [value] = useDebounce(searchValue, 500);
 
   useEffect(() => {
     getProfiles();
@@ -22,7 +24,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
     setHasProfiles(profiles.length);
   }, [profiles]);
 
-  const onSearch = (value) => setSearchValue(value);
+  const onChange = (e) => setSearchValue(e.target.value);
 
   return (
     <>
@@ -37,7 +39,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           <div className="profiles-search">
             <Search
               placeholder="Search profile name..."
-              onSearch={onSearch}
+              onChange={onChange}
               enterButton
               loading={false}
             />
@@ -45,11 +47,11 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           <div className="profiles">
             {hasProfiles > 0
               ? profiles.map((profile) => {
-                  if (searchValue) {
+                  if (value) {
                     if (
                       profile.user.name
                         .toLowerCase()
-                        .includes(searchValue.toLowerCase())
+                        .includes(value.toLowerCase())
                     )
                       return (
                         <motion.div
@@ -83,7 +85,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                     );
                   }
                 })
-              : hasProfiles === 0 && <h4>No profiles found.</h4>}
+              : ''}
           </div>
         </>
       )}

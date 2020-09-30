@@ -434,7 +434,7 @@ button {
 
 .landing-inner {
   color: #fff;
-  height: 100%;
+  height: 92%;
   width: 80%;
   margin: auto;
   display: flex;
@@ -475,6 +475,18 @@ button {
 
 .landing .ant-btn-default:hover {
   color: var(--dark-color)
+}
+
+.landing .green-city {
+  background-image: url('img/green-city.png');
+  background-repeat: repeat-x;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 300px;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.25
 }
 
 /* Profiles Page */
