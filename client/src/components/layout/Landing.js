@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import GoogleLogin from 'react-google-login';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,6 +12,22 @@ const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
+
+  const responseSuccessGoogle = (res) => {
+    axios({
+      method: 'POST',
+      url: `${process.env.REACT_APP_GOOGLE_CLIENT_ID}/google-login`,
+      data: { idToken: res.tokenId }
+    })
+      .then((res) => {
+        console.log('google signin success', res);
+      })
+      .catch((err) => {
+        console.log('google signin error', err);
+      });
+  };
+
+  const responseErrorGoogle = (res) => {};
 
   return (
     <section className="landing">
@@ -39,6 +57,29 @@ const Landing = ({ isAuthenticated }) => {
             <Button type="default" size="large" className="login">
               <Link to="/login">Login</Link>
             </Button>
+            <br />
+            <br />
+            <GoogleLogin
+              clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+              buttonText="Login with Google"
+              onSuccess={responseSuccessGoogle}
+              onFailure={responseErrorGoogle}
+              cookiePolicy={'single_host_origin'}
+              render={(renderProps) => (
+                <>
+                  <Button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    type="default"
+                    size="large"
+                    className="login"
+                  >
+                    <i className="fab fa-google" />
+                    Login with Google
+                  </Button>
+                </>
+              )}
+            />
           </div>
         </motion.div>
       </div>

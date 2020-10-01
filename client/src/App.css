@@ -444,6 +444,10 @@ button {
   text-align: center;
 }
 
+.fab.fa-google {
+  margin-right: 8px
+}
+
 .landing .buttons {
   margin-top: 5rem
 }
