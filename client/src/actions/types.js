@@ -21,3 +21,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+export const GET_TICKETS = 'GET_TICKETS';
+export const GET_TICKET = 'GET_TICKET';
+export const ADD_TICKET = 'ADD_TICKET';
+export const TICKET_ERROR = 'ADD_TICKET';
