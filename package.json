@@ -19,6 +19,7 @@
     "config": "^3.2.4",
     "express": "^4.17.1",
     "express-validator": "^6.3.0",
+    "google-auth-library": "^6.1.0",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.13",
