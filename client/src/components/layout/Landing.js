@@ -55,7 +55,7 @@ const Landing = ({ isAuthenticated }) => {
             </Button>
 
             <Button type="default" size="large" className="login">
-              <Link to="/login">Login</Link>
+              <Link to="/login">Sign In</Link>
             </Button>
             <br />
             <br />
