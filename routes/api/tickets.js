@@ -60,4 +60,17 @@ router.post(
   }
 );
 
+// @route    GET api/tickets
+// @desc     Get all tickets
+// @access   Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const tickets = await Ticket.find().sort({ date: -1 });
+    res.json(tickets);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

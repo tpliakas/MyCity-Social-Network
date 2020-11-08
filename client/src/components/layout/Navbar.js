@@ -12,6 +12,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
+        <Link to="/tickets">Tickets</Link>
+      </li>
+      <li>
         <Link to="/profiles">Profiles</Link>
       </li>
       <li>
