@@ -15,6 +15,7 @@ import NotFound from '../layout/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
 import CreateProfile from '../profile-forms/CreateProfile';
 import EditProfile from '../profile-forms/EditProfile';
+import AddTicket from '../profile-forms/AddTicket';
 
 const Routes = (props) => {
   return (
@@ -33,6 +34,7 @@ const Routes = (props) => {
         <PrivateRoute exact path="/posts" component={Posts} />
         <PrivateRoute exact path="/posts/:id" component={Post} />
         <PrivateRoute exact path="/tickets" component={Tickets} />
+        <PrivateRoute exact path="/add-issue" component={AddTicket} />
         <Route component={NotFound} />
       </Switch>
     </section>
