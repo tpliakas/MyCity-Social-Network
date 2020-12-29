@@ -659,6 +659,11 @@ button {
   margin-right: 0
 }
 
+.ant-btn-primary:hover {
+  opacity: 0.8;
+  color: var(--white-color);
+}
+
 .ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
   width: unset;
   min-width: 350px;

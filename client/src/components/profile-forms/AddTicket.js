@@ -135,7 +135,7 @@ const AddTicket = ({ addTicket, history }) => {
             }
           ]}
         >
-          <Input style={{ width: '20%' }} />
+          <Input style={{ width: 50 }} />
         </Form.Item>
         <Form.Item
           name="ticketType"
@@ -148,9 +148,22 @@ const AddTicket = ({ addTicket, history }) => {
           ]}
         >
           <Input.Group>
-            <Select defaultValue="option1">
-              <Option value="option1">Option1</Option>
-              <Option value="option2">Option1</Option>
+            <Select placeholder="Pick a category" style={{ width: '100%' }}>
+              <Option value="abandon-vehicle">Abandoned Vehicle</Option>
+              <Option value="blocked-drain">Blocked Drain</Option>
+              <Option value="space-cleaning">Space Cleaning</Option>
+              <Option value="graffiti-poster-removal">Graffiti or Poster Removal</Option>
+              <Option value="illegal-dumping">Illegal dumping</Option>
+              <Option value="oversized-abandoned-object">Oversized Abandoned Object</Option>
+              <Option value="other">Other</Option>
+              <Option value="damaged-pavement">Damaged Pavement</Option>
+              <Option value="damaged-playground">Damaged Playground</Option>
+              <Option value="overground-trees-plants">Overground Trees or Plants</Option>
+              <Option value="pothole">Pothole</Option>
+              <Option value="recycle-bin">Recycle Bin Missing or Damaged</Option>
+              <Option value="traffic-lights">Traffic Lights</Option>
+              <Option value="thrash-bin">Thrash Bin Missing or Damaged</Option>
+              <Option value="vandalism">Vandalism</Option>
             </Select>
           </Input.Group>
         </Form.Item>
