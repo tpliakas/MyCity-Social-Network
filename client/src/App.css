@@ -458,8 +458,9 @@ button {
 }
 
 .landing img {
-  width: 200px;
-  margin-bottom: 3rem
+  width: 100px;
+  margin-bottom: 1rem;
+  margin-top: 30px;
 }
 
 .landing-slogan {
@@ -656,6 +657,11 @@ button {
 
 .profiles-search .ant-btn-primary {
   margin-right: 0
+}
+
+.ant-btn-primary:hover {
+  opacity: 0.8;
+  color: var(--white-color);
 }
 
 .ant-input-search.ant-input-search-enter-button.ant-input-group-wrapper {
