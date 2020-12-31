@@ -8,18 +8,17 @@ import { Button, Form, Input, Select } from 'antd';
 import { setAlert } from '../../actions/alert';
 
 const initialState = {
-  title: '', //r
-  city: '', //r
-  area: '', //r
+  title: '',
+  city: '',
+  area: '',
   location: null,
-  address: '', //r
-  addressNumber: '', //r
-  ticketType: '', //r
+  address: '',
+  addressNumber: '',
+  ticketType: '',
   importance: '',
   images: [],
   video: '',
-  status: '',
-  text: '', //r
+  text: '',
 };
 
 const AddTicket = ({ addTicket, history }) => {
@@ -42,7 +41,38 @@ const AddTicket = ({ addTicket, history }) => {
 
   useEffect(() => {
     form.setFieldsValue({ ...{ location: position } });
-  }, [position]);
+  }, [position, form]);
+
+  const onFinish = (values) => {
+    console.log({values})
+    const {
+      title,
+      city,
+      area,
+      location,
+      address,
+      addressNumber,
+      ticketType,
+      importance,
+      images,
+      video,
+      text,
+    } = values;
+    addTicket(
+      {title,
+        city,
+        area,
+        location,
+        address,
+        addressNumber,
+        ticketType,
+        importance,
+        images,
+        video,
+        text,},
+      history
+    );
+  }
 
   return (
     <>
@@ -55,7 +85,7 @@ const AddTicket = ({ addTicket, history }) => {
         {...layout}
         form={form}
         name="add-ticket"
-        // onFinish={onFinish}
+        onFinish={onFinish}
         initialValues={initialState}
         scrollToFirstError
       >
@@ -146,7 +176,6 @@ const AddTicket = ({ addTicket, history }) => {
             }
           ]}
         >
-          <Input.Group>
             <Select placeholder="Pick a category" style={{ width: '100%' }}>
               <Option value="abandon-vehicle">Abandoned Vehicle</Option>
               <Option value="blocked-drain">Blocked Drain</Option>
@@ -164,16 +193,13 @@ const AddTicket = ({ addTicket, history }) => {
               <Option value="thrash-bin">Thrash Bin Missing or Damaged</Option>
               <Option value="vandalism">Vandalism</Option>
             </Select>
-          </Input.Group>
         </Form.Item>
         <Form.Item name="importance" label="Importance">
-          <Input.Group>
             <Select defaultValue="medium">
               <Option value="low">Low</Option>
               <Option value="medium">Medium</Option>
               <Option value="high">High</Option>
             </Select>
-          </Input.Group>
         </Form.Item>
         <Form.Item
           name="images"

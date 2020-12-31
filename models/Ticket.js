@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const regex = /youtu(?:.*\/v\/|.*v\=|\.be\/)([A-Za-z0-9_\-]{11})/
+const regex = /^$|youtu(?:.*\/v\/|.*v\=|\.be\/)([A-Za-z0-9_\-]{11})/
 
 const TicketSchema = new Schema({
   user: {
@@ -55,7 +55,7 @@ const TicketSchema = new Schema({
     validate: regex
 
 },
-  status: {
+  currentStatus: {
     type: String,
     default: 'Pending'
   },
