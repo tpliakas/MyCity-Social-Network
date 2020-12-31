@@ -30,7 +30,7 @@ const TicketItem = ({
             className="btn btn-light"
           >
             <i className="fas fa-thumbs-up" />{' '}
-            <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+            <span>{likes?.length > 0 && <span>{likes.length}</span>}</span>
           </button>
           <button
             onClick={() => console.log(_id)}

@@ -227,7 +227,7 @@ export const addTicket = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post('/api/ticket', formData, config);
+    const res = await axios.post('/api/tickets', formData, config);
 
     dispatch({
       type: ADD_TICKET,
