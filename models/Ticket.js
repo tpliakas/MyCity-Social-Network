@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const regex = /youtu(?:.*\/v\/|.*v\=|\.be\/)([A-Za-z0-9_\-]{11})/
+
 const TicketSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId
@@ -48,11 +50,14 @@ const TicketSchema = new Schema({
     }
   ],
   video: {
-    title: String,
-    url: String
-  },
+    type: String,
+    url: String,
+    validate: regex
+
+},
   status: {
-    title: String
+    type: String,
+    default: 'Pending'
   },
   text: {
     type: String,
