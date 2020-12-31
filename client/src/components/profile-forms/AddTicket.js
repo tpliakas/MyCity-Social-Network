@@ -20,7 +20,6 @@ const initialState = {
   video: '',
   status: '',
   text: '', //r
-  name: ''
 };
 
 const AddTicket = ({ addTicket, history }) => {
@@ -175,6 +174,32 @@ const AddTicket = ({ addTicket, history }) => {
               <Option value="high">High</Option>
             </Select>
           </Input.Group>
+        </Form.Item>
+        <Form.Item
+          name="images"
+          label="Images"
+          extra="Comma separated links"
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="video"
+          label="Video Link"
+          extra="E.g. https://www.youtube.com/watch?v=m8e-FF8MsqU"
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="text"
+          label="Description"
+          rules={[
+            {
+              required: true,
+              message: 'Please add a description!'
+            }
+          ]}
+        >
+          <Input.TextArea />
         </Form.Item>
         <input type="submit" className="btn btn-primary my-1" value="Submit" />
         <Link className="btn btn-light my-1" to="/dashboard">
