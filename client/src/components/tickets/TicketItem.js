@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { addTicketLike } from '../../actions/ticket';
 
 const TicketItem = ({
+  addTicketLike,
   auth,
   ticket: { _id, text, name, avatar, user, likes, comments, date },
   showActions
@@ -25,7 +27,7 @@ const TicketItem = ({
       {showActions && (
         <>
           <button
-            onClick={() => console.log(_id)}
+            onClick={() => addTicketLike(_id)}
             type="button"
             className="btn btn-light"
           >
@@ -77,4 +79,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(TicketItem);
+export default connect(mapStateToProps, { addTicketLike })(TicketItem);
