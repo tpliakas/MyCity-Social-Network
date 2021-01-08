@@ -25,4 +25,4 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const GET_TICKETS = 'GET_TICKETS';
 export const GET_TICKET = 'GET_TICKET';
 export const ADD_TICKET = 'ADD_TICKET';
-export const TICKET_ERROR = 'ADD_TICKET';
+export const TICKET_ERROR = 'TICKET_ERROR';

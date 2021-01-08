@@ -8,7 +8,7 @@ import { addTicketLike } from '../../actions/ticket';
 const TicketItem = ({
   addTicketLike,
   auth,
-  ticket: { _id, text, name, avatar, user, likes, comments, date },
+  ticket: { _id, text, name, avatar, user, likes, date },
   showActions
 }) => (
   <div className="post bg-white p-1 my-1">
@@ -41,12 +41,6 @@ const TicketItem = ({
           >
             <i className="fas fa-thumbs-down" />
           </button>
-          <Link to={`/tickets/${_id}`} className="btn btn-primary">
-            Comments{' '}
-            {comments.length > 0 && (
-              <span className="comment-count">{comments.length}</span>
-            )}
-          </Link>
           {!auth.loading && user === auth.user._id && (
             <button
               onClick={() => console.log(_id)}
@@ -67,11 +61,11 @@ TicketItem.defaultProps = {
 };
 
 TicketItem.propTypes = {
-  post: PropTypes.object.isRequired,
+  ticket: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
+  addTicketLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
+  deleteTicket: PropTypes.func.isRequired,
   showActions: PropTypes.bool
 };
 
