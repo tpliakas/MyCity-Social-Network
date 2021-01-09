@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { addTicketLike, removeTicketLike } from '../../actions/ticket';
 
 const TicketItem = ({
+  addTicketLike,
+  removeTicketLike,
   auth,
-  ticket: { _id, text, name, avatar, user, likes, comments, date },
+  ticket: { _id, text, name, avatar, user, likes, date },
   showActions
 }) => (
   <div className="post bg-white p-1 my-1">
@@ -25,7 +28,7 @@ const TicketItem = ({
       {showActions && (
         <>
           <button
-            onClick={() => console.log(_id)}
+            onClick={() => addTicketLike(_id)}
             type="button"
             className="btn btn-light"
           >
@@ -33,18 +36,12 @@ const TicketItem = ({
             <span>{likes?.length > 0 && <span>{likes.length}</span>}</span>
           </button>
           <button
-            onClick={() => console.log(_id)}
+            onClick={() => removeTicketLike(_id)}
             type="button"
             className="btn btn-light"
           >
             <i className="fas fa-thumbs-down" />
           </button>
-          <Link to={`/tickets/${_id}`} className="btn btn-primary">
-            Comments{' '}
-            {comments.length > 0 && (
-              <span className="comment-count">{comments.length}</span>
-            )}
-          </Link>
           {!auth.loading && user === auth.user._id && (
             <button
               onClick={() => console.log(_id)}
@@ -65,11 +62,11 @@ TicketItem.defaultProps = {
 };
 
 TicketItem.propTypes = {
-  post: PropTypes.object.isRequired,
+  ticket: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
+  addTicketLike: PropTypes.func.isRequired,
+  removeTicketLike: PropTypes.func.isRequired,
+  deleteTicket: PropTypes.func.isRequired,
   showActions: PropTypes.bool
 };
 
@@ -77,4 +74,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(TicketItem);
+export default connect(mapStateToProps, { addTicketLike, removeTicketLike })(
+  TicketItem
+);
