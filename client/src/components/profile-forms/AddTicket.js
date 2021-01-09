@@ -18,7 +18,7 @@ const initialState = {
   importance: '',
   images: [],
   video: '',
-  text: '',
+  text: ''
 };
 
 const AddTicket = ({ addTicket, history }) => {
@@ -44,7 +44,7 @@ const AddTicket = ({ addTicket, history }) => {
   }, [position, form]);
 
   const onFinish = (values) => {
-    console.log({values})
+    console.log({ values });
     const {
       title,
       city,
@@ -56,10 +56,11 @@ const AddTicket = ({ addTicket, history }) => {
       importance,
       images,
       video,
-      text,
+      text
     } = values;
     addTicket(
-      {title,
+      {
+        title,
         city,
         area,
         location,
@@ -69,10 +70,11 @@ const AddTicket = ({ addTicket, history }) => {
         importance,
         images,
         video,
-        text,},
+        text
+      },
       history
     );
-  }
+  };
 
   return (
     <>
@@ -176,36 +178,38 @@ const AddTicket = ({ addTicket, history }) => {
             }
           ]}
         >
-            <Select placeholder="Pick a category" style={{ width: '100%' }}>
-              <Option value="abandon-vehicle">Abandoned Vehicle</Option>
-              <Option value="blocked-drain">Blocked Drain</Option>
-              <Option value="space-cleaning">Space Cleaning</Option>
-              <Option value="graffiti-poster-removal">Graffiti or Poster Removal</Option>
-              <Option value="illegal-dumping">Illegal dumping</Option>
-              <Option value="oversized-abandoned-object">Oversized Abandoned Object</Option>
-              <Option value="other">Other</Option>
-              <Option value="damaged-pavement">Damaged Pavement</Option>
-              <Option value="damaged-playground">Damaged Playground</Option>
-              <Option value="overground-trees-plants">Overground Trees or Plants</Option>
-              <Option value="pothole">Pothole</Option>
-              <Option value="recycle-bin">Recycle Bin Missing or Damaged</Option>
-              <Option value="traffic-lights">Traffic Lights</Option>
-              <Option value="thrash-bin">Thrash Bin Missing or Damaged</Option>
-              <Option value="vandalism">Vandalism</Option>
-            </Select>
+          <Select placeholder="Pick a category" style={{ width: '100%' }}>
+            <Option value="abandon-vehicle">Abandoned Vehicle</Option>
+            <Option value="blocked-drain">Blocked Drain</Option>
+            <Option value="space-cleaning">Space Cleaning</Option>
+            <Option value="graffiti-poster-removal">
+              Graffiti or Poster Removal
+            </Option>
+            <Option value="illegal-dumping">Illegal dumping</Option>
+            <Option value="oversized-abandoned-object">
+              Oversized Abandoned Object
+            </Option>
+            <Option value="other">Other</Option>
+            <Option value="damaged-pavement">Damaged Pavement</Option>
+            <Option value="damaged-playground">Damaged Playground</Option>
+            <Option value="overground-trees-plants">
+              Overground Trees or Plants
+            </Option>
+            <Option value="pothole">Pothole</Option>
+            <Option value="recycle-bin">Recycle Bin Missing or Damaged</Option>
+            <Option value="traffic-lights">Traffic Lights</Option>
+            <Option value="thrash-bin">Thrash Bin Missing or Damaged</Option>
+            <Option value="vandalism">Vandalism</Option>
+          </Select>
         </Form.Item>
         <Form.Item name="importance" label="Importance">
-            <Select defaultValue="medium">
-              <Option value="low">Low</Option>
-              <Option value="medium">Medium</Option>
-              <Option value="high">High</Option>
-            </Select>
+          <Select defaultValue="medium">
+            <Option value="low">Low</Option>
+            <Option value="medium">Medium</Option>
+            <Option value="high">High</Option>
+          </Select>
         </Form.Item>
-        <Form.Item
-          name="images"
-          label="Images"
-          extra="Comma separated links"
-        >
+        <Form.Item name="images" label="Images" extra="Comma separated links">
           <Input />
         </Form.Item>
         <Form.Item

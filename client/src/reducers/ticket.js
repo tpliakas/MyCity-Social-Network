@@ -2,7 +2,8 @@ import {
   GET_TICKETS,
   GET_TICKET,
   ADD_TICKET,
-  TICKET_ERROR
+  TICKET_ERROR,
+  UPDATE_TICKET_LIKES
 } from '../actions/types';
 
 const initialState = {
@@ -38,6 +39,19 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case UPDATE_TICKET_LIKES:
+      return {
+        ...state,
+        posts: state.tickets.map((ticket) =>
+          ticket._id === payload.id
+            ? {
+                ...ticket,
+                likes: payload.likes
+              }
+            : ticket
+        ),
         loading: false
       };
     default:
