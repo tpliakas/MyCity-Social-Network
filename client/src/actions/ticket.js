@@ -56,3 +56,20 @@ export const addTicketLike = (id) => async (dispatch) => {
     });
   }
 };
+
+// Remove ticket like
+export const removeTicketLike = (id) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/api/tickets/unlike/${id}`);
+
+    dispatch({
+      type: UPDATE_TICKET_LIKES,
+      payload: { id, likes: res.data }
+    });
+  } catch (err) {
+    dispatch({
+      type: TICKET_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

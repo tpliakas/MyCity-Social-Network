@@ -44,7 +44,7 @@ export default function (state = initialState, action) {
     case UPDATE_TICKET_LIKES:
       return {
         ...state,
-        posts: state.tickets.map((ticket) =>
+        tickets: state.tickets.map((ticket) =>
           ticket._id === payload.id
             ? {
                 ...ticket,
