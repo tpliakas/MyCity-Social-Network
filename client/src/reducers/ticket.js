@@ -3,7 +3,8 @@ import {
   GET_TICKET,
   ADD_TICKET,
   TICKET_ERROR,
-  UPDATE_TICKET_LIKES
+  UPDATE_TICKET_LIKES,
+  DELETE_TICKET
 } from '../actions/types';
 
 const initialState = {
@@ -52,6 +53,12 @@ export default function (state = initialState, action) {
               }
             : ticket
         ),
+        loading: false
+      };
+    case DELETE_TICKET:
+      return {
+        ...state,
+        tickets: state.tickets.filter((post) => post._id !== payload),
         loading: false
       };
     default:

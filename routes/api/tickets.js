@@ -73,6 +73,34 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @route    DELETE api/tickets/:id
+// @desc     Delete a ticket
+// @access   Private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const ticket = await Ticket.findById(req.params.id);
+
+    if (!ticket) {
+      return res.status(404).json({ msg: 'Ticket not found' });
+    }
+
+    // Check user
+    if (ticket.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    await ticket.remove();
+
+    res.json({ msg: 'Ticket removed' });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route    PUT api/tickets/like/:id
 // @desc     Like a ticket
 // @access   Private
