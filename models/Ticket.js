@@ -20,13 +20,7 @@ const TicketSchema = new Schema({
     required: true
   },
   location: {
-    type: {
-      type: String,
-      enum: ['Point']
-    },
-    coordinates: {
-      type: [Number]
-    }
+    type: String
   },
   address: {
     type: String,
@@ -45,8 +39,7 @@ const TicketSchema = new Schema({
   },
   images: [
     {
-      title: String,
-      url: String
+      type: String
     }
   ],
   video: {
@@ -75,6 +68,7 @@ const TicketSchema = new Schema({
       }
     }
   ],
+  // Decided to not use comments use atm
   comments: [
     {
       user: {
