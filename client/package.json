@@ -10,6 +10,7 @@
     "antd": "^4.10.1",
     "axios": "^0.21.1",
     "framer-motion": "^2.7.5",
+    "mapbox-gl": "^2.0.1",
     "moment": "^2.27.0",
     "prettier": "^2.2.1",
     "prop-types": "^15.7.2",
