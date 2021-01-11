@@ -671,9 +671,62 @@ button {
 }
 
 /* Tickets */
+.ticket {
+  grid-template-columns: 2fr 5fr;
+  align-items: unset;
+}
+
+.ticket-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ticket .ant-image {
+  margin: 5px
+}
+
+.ticket .ant-image img {
+  width: 200px;
+  height: 175px;
+  object-fit: cover;
+}
+
+.ticket img:hover {
+  cursor: pointer;
+  filter: brightness(75%);
+  transition: all 300ms ease;
+}
+
 .ticket-title {
   display: flex;
   justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.ticket-address {
+  font-size: 0.9rem;
+}
+
+.ticket-description {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.ticket-video {
+  text-align: center;
+}
+
+.ticket-video:hover {
+  cursor: pointer;
+  color: #ff0000;
+  transition: all 300ms ease;
+}
+
+.ticket-media {
+  display: flex;
+  align-items: center;
 }
 
 /* Mobile Styles */

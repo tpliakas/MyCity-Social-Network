@@ -42,7 +42,9 @@ router.post(
         addressNumber: req.body.addressNumber,
         ticketType: req.body.ticketType,
         importance: req.body.importance,
-        images: req.body.images,
+        images: req.body.images
+          ? req.body.images.split(',').map((image) => image.trim())
+          : [],
         video: req.body.video,
         status: req.body.images,
         text: req.body.text,
