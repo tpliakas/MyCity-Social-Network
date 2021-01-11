@@ -42,7 +42,9 @@ router.post(
         addressNumber: req.body.addressNumber,
         ticketType: req.body.ticketType,
         importance: req.body.importance,
-        images: req.body.images,
+        images: req.body.images
+          ? req.body.images.split(',').map((image) => image.trim())
+          : [],
         video: req.body.video,
         status: req.body.images,
         text: req.body.text,
@@ -69,6 +71,34 @@ router.get('/', auth, async (req, res) => {
     res.json(tickets);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    DELETE api/tickets/:id
+// @desc     Delete a ticket
+// @access   Private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const ticket = await Ticket.findById(req.params.id);
+
+    if (!ticket) {
+      return res.status(404).json({ msg: 'Ticket not found' });
+    }
+
+    // Check user
+    if (ticket.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    await ticket.remove();
+
+    res.json({ msg: 'Ticket removed' });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
     res.status(500).send('Server Error');
   }
 });

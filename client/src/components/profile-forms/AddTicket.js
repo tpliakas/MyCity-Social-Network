@@ -44,7 +44,6 @@ const AddTicket = ({ addTicket, history }) => {
   }, [position, form]);
 
   const onFinish = (values) => {
-    console.log({ values });
     const {
       title,
       city,

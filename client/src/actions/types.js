@@ -26,3 +26,4 @@ export const GET_TICKET = 'GET_TICKET';
 export const ADD_TICKET = 'ADD_TICKET';
 export const TICKET_ERROR = 'TICKET_ERROR';
 export const UPDATE_TICKET_LIKES = 'UPDATE_TICKET_LIKES';
+export const DELETE_TICKET = 'DELETE_TICKET';

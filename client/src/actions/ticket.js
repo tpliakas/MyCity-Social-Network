@@ -3,8 +3,10 @@ import {
   GET_TICKETS,
   GET_TICKET,
   TICKET_ERROR,
-  UPDATE_TICKET_LIKES
+  UPDATE_TICKET_LIKES,
+  DELETE_TICKET
 } from './types';
+import { setAlert } from './alert';
 
 // Get tickets
 export const getTickets = () => async (dispatch) => {
@@ -66,6 +68,25 @@ export const removeTicketLike = (id) => async (dispatch) => {
       type: UPDATE_TICKET_LIKES,
       payload: { id, likes: res.data }
     });
+  } catch (err) {
+    dispatch({
+      type: TICKET_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Delete ticket
+export const deleteTicket = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/tickets/${id}`);
+
+    dispatch({
+      type: DELETE_TICKET,
+      payload: id
+    });
+
+    dispatch(setAlert('Ticket Removed', 'success'));
   } catch (err) {
     dispatch({
       type: TICKET_ERROR,

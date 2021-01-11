@@ -219,7 +219,7 @@ export const deleteAccount = () => async (dispatch) => {
 };
 
 // Add ticket
-export const addTicket = (formData) => async (dispatch) => {
+export const addTicket = (formData, history) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -235,6 +235,8 @@ export const addTicket = (formData) => async (dispatch) => {
     });
 
     dispatch(setAlert('New Ticket Issue Created', 'success'));
+
+    history.push('/dashboard');
   } catch (err) {
     dispatch({
       type: TICKET_ERROR,
