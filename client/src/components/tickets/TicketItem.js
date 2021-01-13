@@ -63,7 +63,7 @@ const TicketItem = ({
   return (
     <div
       className="post ticket bg-white p-1 my-1"
-      style={{ border: `2px solid ${borderColor}` }}
+      style={{ border: 0, borderTop: `3px solid ${borderColor}` }}
     >
       <div className="ticket-side">
         <div className="top">

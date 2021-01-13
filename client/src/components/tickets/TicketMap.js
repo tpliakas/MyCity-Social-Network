@@ -12,6 +12,7 @@ const TicketMap = ({ onMapChange }) => {
           checkedChildren="Map enabled"
           unCheckedChildren="Map disabled"
           defaultChecked
+          autoFocus
         />
       </div>
     </>

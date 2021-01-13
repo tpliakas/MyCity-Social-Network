@@ -43,6 +43,7 @@ const Tickets = ({
           onChange={onMapChange}
           checkedChildren="Map enabled"
           unCheckedChildren="Map disabled"
+          autoFocus
         />
       </div>
       <div className="profiles-search">
