@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Register from '../auth/Register';
 import Login from '../auth/Login';
@@ -18,8 +18,10 @@ import EditProfile from '../profile-forms/EditProfile';
 import AddTicket from '../profile-forms/AddTicket';
 
 const Routes = (props) => {
+  const [showMap, setShowMap] = useState(false);
+
   return (
-    <section className="container">
+    <section className={`container ${showMap && 'map-container'}`}>
       <Alert />
       <Switch>
         <Route exact path="/register" component={Register} />
@@ -33,7 +35,13 @@ const Routes = (props) => {
         <PrivateRoute exact path="/add-education" component={AddEducation} />
         <PrivateRoute exact path="/posts" component={Posts} />
         <PrivateRoute exact path="/posts/:id" component={Post} />
-        <PrivateRoute exact path="/tickets" component={Tickets} />
+        <PrivateRoute
+          exact
+          path="/tickets"
+          component={Tickets}
+          showMap={showMap}
+          setShowMap={setShowMap}
+        />
         <PrivateRoute exact path="/add-issue" component={AddTicket} />
         <Route component={NotFound} />
       </Switch>

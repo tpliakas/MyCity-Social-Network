@@ -1,33 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Input } from 'antd';
+import { Input, Switch } from 'antd';
 import Spinner from '../layout/Spinner';
 import TicketItem from './TicketItem';
+import TicketMap from './TicketMap';
 import { getTickets } from '../../actions/ticket';
 import { useDebounce } from 'use-debounce';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const { Search } = Input;
 
-const Tickets = ({ getTickets, ticket: { tickets, loading } }) => {
+const Tickets = ({
+  getTickets,
+  ticket: { tickets, loading },
+  showMap,
+  setShowMap
+}) => {
   const [searchValue, setSearchValue] = useState(null);
   const [value] = useDebounce(searchValue, 500);
-
+  console.log({ showMap, setShowMap });
   const onChange = (e) => setSearchValue(e.target.value);
 
   useEffect(() => {
     getTickets();
   }, [getTickets]);
 
+  const onMapChange = (checked) => setShowMap(checked);
+
   return loading ? (
     <Spinner tip="Loading..." size="large" />
+  ) : showMap ? (
+    <TicketMap onMapChange={onMapChange} />
   ) : (
     <>
       <h1 className="large text-primary">Issue Tickets</h1>
       <p className="lead">
         <i className="fas fa-user" /> List of all open Issue Tickets
       </p>
+      <div className="map-switch">
+        <Switch
+          onChange={onMapChange}
+          checkedChildren="Map enabled"
+          unCheckedChildren="Map disabled"
+        />
+      </div>
       <div className="profiles-search">
         <Search
           placeholder="Filter Area. e.g. Marousi"
