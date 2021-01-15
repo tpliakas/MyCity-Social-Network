@@ -4,8 +4,7 @@ import { Switch } from 'antd';
 
 const TicketMap = ({ onMapChange }) => {
   return (
-    <>
-      <p>Map</p>
+    <div className="map-wrapper">
       <div className="map-switch">
         <Switch
           onChange={onMapChange}
@@ -15,7 +14,11 @@ const TicketMap = ({ onMapChange }) => {
           autoFocus
         />
       </div>
-    </>
+      <div className="sidebar pad2">Tickets List</div>
+      <div id="map" className="map pad2">
+        Map
+      </div>
+    </div>
   );
 };
 
