@@ -19,7 +19,7 @@ const Tickets = ({
 }) => {
   const [searchValue, setSearchValue] = useState(null);
   const [value] = useDebounce(searchValue, 500);
-  console.log({ showMap, setShowMap });
+
   const onChange = (e) => setSearchValue(e.target.value);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Tickets = ({
   return loading ? (
     <Spinner tip="Loading..." size="large" />
   ) : showMap ? (
-    <TicketMap onMapChange={onMapChange} />
+    <TicketMap onMapChange={onMapChange} tickets={tickets} />
   ) : (
     <>
       <h1 className="large text-primary">Issue Tickets</h1>
@@ -44,6 +44,7 @@ const Tickets = ({
           checkedChildren="Map enabled"
           unCheckedChildren="Map disabled"
           autoFocus
+          defaultChecked
         />
       </div>
       <div className="profiles-search">
@@ -98,7 +99,9 @@ const Tickets = ({
 
 Tickets.propTypes = {
   getTickets: PropTypes.func.isRequired,
-  ticket: PropTypes.object.isRequired
+  ticket: PropTypes.object.isRequired,
+  showMap: PropTypes.bool.isRequired,
+  setShowMap: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
