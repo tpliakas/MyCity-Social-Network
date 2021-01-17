@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Switch } from 'antd';
 import mapboxgl from 'mapbox-gl';
 
@@ -7,7 +7,6 @@ mapboxgl.accessToken =
   'pk.eyJ1IjoidGhlb3Jpb3MiLCJhIjoiY2trMGY0OHI3MGdzeTJ2cXMwZHVhdDJnMiJ9.F3BOTpZILjuG5nCjGIQB7A';
 
 const TicketMap = ({ onMapChange, tickets }) => {
-  console.log({ tickets });
   const [map, setMap] = useState(null);
 
   useEffect(() => {
@@ -21,7 +20,62 @@ const TicketMap = ({ onMapChange, tickets }) => {
     );
   }, []);
 
-  console.log(map);
+  const ticketsList = useMemo(() => {
+    if (tickets) {
+      const ticketsGeo = tickets.map((ticket, idx) => {
+        const { address, addressNumber, area, city, location } = ticket;
+
+        let coordinates;
+        if (location) {
+          let coords = location.split(',');
+          coordinates = [parseFloat(coords[0]), parseFloat(coords[1])];
+        }
+
+        return {
+          id: idx,
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: coordinates || []
+          },
+          properties: {
+            address: address,
+            addressNumber: addressNumber,
+            city: city,
+            area: area
+          }
+        };
+      });
+
+      console.log(ticketsGeo);
+
+      return {
+        type: 'FeatureCollection',
+        features: ticketsGeo
+      };
+    }
+  }, [tickets]);
+
+  useEffect(() => {
+    if (map && ticketsList) {
+      map.on('load', function (e) {
+        map.addLayer({
+          id: 'locations',
+          type: 'symbol',
+          source: {
+            type: 'geojson',
+            data: ticketsList
+          },
+          layout: {
+            'icon-image': 'ch-motorway-2',
+            'icon-allow-overlap': true
+          }
+        });
+      });
+    }
+  }, [map, ticketsList]);
+
+  console.log({ map, ticketsList });
 
   return (
     <div className="map-wrapper">
@@ -42,6 +96,9 @@ const TicketMap = ({ onMapChange, tickets }) => {
   );
 };
 
-// TicketMap.propTypes = {};
+TicketMap.propTypes = {
+  onMapChange: PropTypes.func.isRequired,
+  tickets: PropTypes.array.isRequired
+};
 
 export default TicketMap;

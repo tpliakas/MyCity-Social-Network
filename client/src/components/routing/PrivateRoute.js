@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 const PrivateRoute = ({
   component: Component,
   auth: { isAuthenticated, loading },
-  showMap: showMap,
-  setShowMap: setShowMap,
+  showMap,
+  setShowMap,
   ...rest
 }) => (
   <Route
