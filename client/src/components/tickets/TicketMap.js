@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Switch } from 'antd';
 import mapboxgl from 'mapbox-gl';
+import { motion } from 'framer-motion';
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoidGhlb3Jpb3MiLCJhIjoiY2trMGY0OHI3MGdzeTJ2cXMwZHVhdDJnMiJ9.F3BOTpZILjuG5nCjGIQB7A';
@@ -47,8 +48,6 @@ const TicketMap = ({ onMapChange, tickets }) => {
         };
       });
 
-      console.log(ticketsGeo);
-
       return {
         type: 'FeatureCollection',
         features: ticketsGeo
@@ -75,24 +74,31 @@ const TicketMap = ({ onMapChange, tickets }) => {
     }
   }, [map, ticketsList]);
 
-  console.log({ map, ticketsList });
-
   return (
-    <div className="map-wrapper">
-      <div className="map-switch">
-        <Switch
-          onChange={onMapChange}
-          checkedChildren="Map enabled"
-          unCheckedChildren="Map disabled"
-          defaultChecked
-          autoFocus
-        />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { duration: 1 }
+      }}
+      exit={{ opacity: 0, scale: 0 }}
+    >
+      <div className="map-wrapper">
+        <div className="map-switch">
+          <Switch
+            onChange={onMapChange}
+            checkedChildren="Map enabled"
+            unCheckedChildren="Map disabled"
+            defaultChecked
+            autoFocus
+          />
+        </div>
+        <div className="sidebar pad2">Tickets List</div>
+        <div id="map" className="map pad2">
+          Map
+        </div>
       </div>
-      <div className="sidebar pad2">Tickets List</div>
-      <div id="map" className="map pad2">
-        Map
-      </div>
-    </div>
+    </motion.div>
   );
 };
 
