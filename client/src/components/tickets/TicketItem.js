@@ -166,8 +166,6 @@ const TicketItem = ({
           cancelButtonProps={{ style: { display: 'none' } }}
           width={900}
         >
-          {console.log({ isVideoVisible })}
-
           <ReactPlayer
             url={video}
             playing={isVideoVisible}
