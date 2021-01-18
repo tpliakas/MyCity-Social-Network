@@ -749,13 +749,18 @@ button {
 .map-wrapper {
   background: var(--white-color);
   color: var(--primary-color);
-  margin: 70px 0 0;
+  margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
 }
 
 .sidebar {
+  position: absolute;
+  top: 70px;
+  left: 0;
   width: 33.3333%;
+  overflow: hidden;
+  height: calc(100% - 70px);
 }
 
 .map {
@@ -768,7 +773,6 @@ button {
 }
 
 .pad2 {
-  padding: 20px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -776,10 +780,8 @@ button {
 
 .heading {
   background: var(--white-color);
-  border-bottom: 1px solid #eee;
-  height: 60px;
-  line-height: 60px;
-  padding: 0 10px;
+  border-bottom: 1px solid #d2d2d2;
+  padding: 20px;
 }
 
 .heading h1 {
@@ -790,12 +792,13 @@ button {
 .listings {
   height: 100%;
   overflow: auto;
-  padding-bottom: 60px;
+  padding: 20px 20px 60px;
 }
 
 .listings .item {
   display: block;
-  border-bottom: 1px solid #eee;
+  color: var(--dark-color);
+  border-bottom: 1px solid #d2d2d2;
   padding: 10px;
   text-decoration: none;
 }
@@ -811,10 +814,10 @@ button {
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,
-.listings .item .title:hover { color: #8cc63f; }
+.listings .item .title:hover { color: var(--primary-color-hover); }
 
 .listings .item.active {
-  background-color: #f8f8f8;
+  background-color: var(--white-color);
 }
 
 ::-webkit-scrollbar {
@@ -839,7 +842,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00853e;
+  background: var(--primary-color);
   border-radius: 0;
 }
 
