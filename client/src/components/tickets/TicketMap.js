@@ -24,7 +24,7 @@ const TicketMap = ({ onMapChange, tickets }) => {
   const ticketsList = useMemo(() => {
     if (tickets) {
       const ticketsGeo = tickets.map((ticket, idx) => {
-        const { address, addressNumber, area, city, location } = ticket;
+        const { address, addressNumber, area, city, location, title } = ticket;
 
         let coordinates;
         if (location) {
@@ -43,7 +43,8 @@ const TicketMap = ({ onMapChange, tickets }) => {
             address: address,
             addressNumber: addressNumber,
             city: city,
-            area: area
+            area: area,
+            title: title
           }
         };
       });
@@ -74,6 +75,51 @@ const TicketMap = ({ onMapChange, tickets }) => {
     }
   }, [map, ticketsList]);
 
+  useEffect(() => {
+    if (!ticketsList) return;
+    ticketsList.features.forEach(function (ticket, i) {
+      const prop = ticket.properties;
+      const { id } = ticket;
+
+      const listings = document.getElementById('listings');
+      const listing = listings.appendChild(document.createElement('div'));
+
+      listing.id = 'listing-' + id;
+      listing.className = 'item';
+
+      const link = listing.appendChild(document.createElement('a'));
+      link.href = '#';
+      link.className = 'title';
+      link.id = 'link-' + id;
+      link.innerHTML = `${prop.address} ${prop.addressNumber}`;
+
+      const details = listing.appendChild(document.createElement('div'));
+      details.innerHTML = `${prop.area}, ${prop.city}`;
+    });
+  }, [ticketsList]);
+
+  const flyToTicket = (currentFeature) =>
+    map.flyTo({
+      center: currentFeature.geometry.coordinates,
+      zoom: 15
+    });
+
+  const createPopUp = (currentFeature) => {
+    const popUps = document.getElementsByClassName('mapboxgl-popup');
+    /** Check if there is already a popup on the map and if so, remove it */
+    if (popUps[0]) popUps[0].remove();
+
+    const popup = new mapboxgl.Popup({ closeOnClick: false })
+      .setLngLat(currentFeature.geometry.coordinates)
+      .setHTML(
+        `<h3>${currentFeature.properties.title}</h3>` +
+          '<h4>' +
+          currentFeature.properties.address +
+          '</h4>'
+      )
+      .addTo(map);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -93,7 +139,12 @@ const TicketMap = ({ onMapChange, tickets }) => {
             autoFocus
           />
         </div>
-        <div className="sidebar pad2">Tickets List</div>
+        <div className="sidebar pad2">
+          <div className="heading">
+            <h1>Tickets List</h1>
+          </div>
+          <div id="listings" className="listings" />
+        </div>
         <div id="map" className="map pad2">
           Map
         </div>

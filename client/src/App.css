@@ -726,7 +726,9 @@ button {
 
 .ticket-media {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 
 /* Map styles */
@@ -745,15 +747,20 @@ button {
 }
 
 .map-wrapper {
-  background: #404040;
-  color: #f8f8f8;
-  margin: 70px 0 0;
+  background: var(--white-color);
+  color: var(--primary-color);
+  margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
 }
 
 .sidebar {
+  position: absolute;
+  top: 70px;
+  left: 0;
   width: 33.3333%;
+  overflow: hidden;
+  height: calc(100% - 70px);
 }
 
 .map {
@@ -766,10 +773,77 @@ button {
 }
 
 .pad2 {
-  padding: 20px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.heading {
+  background: var(--white-color);
+  border-bottom: 1px solid #d2d2d2;
+  padding: 20px;
+}
+
+.heading h1 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+}
+
+.listings {
+  height: 100%;
+  overflow: auto;
+  padding: 20px 20px 60px;
+}
+
+.listings .item {
+  display: block;
+  color: var(--dark-color);
+  border-bottom: 1px solid #d2d2d2;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listings .item:last-child { border-bottom: none; }
+
+.listings .item .title {
+  display: block;
+  color: var(--dark-color);
+  font-weight: 700;
+}
+
+.listings .item .title small { font-weight: 400; }
+
+.listings .item.active .title,
+.listings .item .title:hover { color: var(--primary-color-hover); }
+
+.listings .item.active {
+  background-color: var(--white-color);
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+.clearfix { display: block; }
+
+.clearfix::after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 0;
 }
 
 
