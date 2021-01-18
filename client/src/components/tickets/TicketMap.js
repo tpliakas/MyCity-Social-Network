@@ -74,6 +74,29 @@ const TicketMap = ({ onMapChange, tickets }) => {
     }
   }, [map, ticketsList]);
 
+  useEffect(() => {
+    if (!ticketsList) return;
+    ticketsList.features.forEach(function (ticket, i) {
+      const prop = ticket.properties;
+      const { id } = ticket;
+
+      const listings = document.getElementById('listings');
+      const listing = listings.appendChild(document.createElement('div'));
+
+      listing.id = 'listing-' + id;
+      listing.className = 'item';
+
+      const link = listing.appendChild(document.createElement('a'));
+      link.href = '#';
+      link.className = 'title';
+      link.id = 'link-' + id;
+      link.innerHTML = `${prop.address} ${prop.addressNumber}`;
+
+      const details = listing.appendChild(document.createElement('div'));
+      details.innerHTML = `${prop.area}, ${prop.city}`;
+    });
+  }, [ticketsList]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -93,7 +116,12 @@ const TicketMap = ({ onMapChange, tickets }) => {
             autoFocus
           />
         </div>
-        <div className="sidebar pad2">Tickets List</div>
+        <div className="sidebar pad2">
+          <div className="heading">
+            <h1>Tickets List</h1>
+          </div>
+          <div id="listings" className="listings" />
+        </div>
         <div id="map" className="map pad2">
           Map
         </div>
