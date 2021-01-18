@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Switch } from 'antd';
 import mapboxgl from 'mapbox-gl';
@@ -23,31 +23,40 @@ const TicketMap = ({ onMapChange, tickets }) => {
 
   const ticketsList = useMemo(() => {
     if (tickets) {
-      const ticketsGeo = tickets.map((ticket, idx) => {
-        const { address, addressNumber, area, city, location, title } = ticket;
+      const ticketsGeo = tickets
+        .filter((ticket) => ticket.location !== '')
+        .map((ticket, idx) => {
+          const {
+            address,
+            addressNumber,
+            area,
+            city,
+            location,
+            title
+          } = ticket;
 
-        let coordinates;
-        if (location) {
-          let coords = location.split(',');
-          coordinates = [parseFloat(coords[0]), parseFloat(coords[1])];
-        }
-
-        return {
-          id: idx,
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: coordinates || []
-          },
-          properties: {
-            address: address,
-            addressNumber: addressNumber,
-            city: city,
-            area: area,
-            title: title
+          let coordinates;
+          if (location) {
+            let coords = location.split(',');
+            coordinates = [parseFloat(coords[0]), parseFloat(coords[1])];
           }
-        };
-      });
+
+          return {
+            id: idx,
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: coordinates || []
+            },
+            properties: {
+              address: address,
+              addressNumber: addressNumber,
+              city: city,
+              area: area,
+              title: title
+            }
+          };
+        });
 
       return {
         type: 'FeatureCollection',
@@ -58,7 +67,7 @@ const TicketMap = ({ onMapChange, tickets }) => {
 
   useEffect(() => {
     if (map && ticketsList) {
-      map.on('load', function (e) {
+      map.on('load', (e) => {
         map.addLayer({
           id: 'locations',
           type: 'symbol',
@@ -76,8 +85,8 @@ const TicketMap = ({ onMapChange, tickets }) => {
   }, [map, ticketsList]);
 
   useEffect(() => {
-    if (!ticketsList) return;
-    ticketsList.features.forEach(function (ticket, i) {
+    if (!ticketsList || !map) return;
+    ticketsList.features.forEach((ticket, idx) => {
       const prop = ticket.properties;
       const { id } = ticket;
 
@@ -95,30 +104,59 @@ const TicketMap = ({ onMapChange, tickets }) => {
 
       const details = listing.appendChild(document.createElement('div'));
       details.innerHTML = `${prop.area}, ${prop.city}`;
-    });
-  }, [ticketsList]);
 
-  const flyToTicket = (currentFeature) =>
+      link.addEventListener('click', (e) => {
+        flyToTicket(ticket);
+        // createPopUp(ticket);
+
+        const activeItem = document.getElementsByClassName('active');
+        if (activeItem[0]) {
+          activeItem[0].classList.remove('active');
+        }
+        e.target.parentNode.classList.add('active');
+      });
+    });
+  }, [ticketsList, map]);
+
+  const flyToTicket = (currentFeature) => {
+    if (!map) return;
+
     map.flyTo({
       center: currentFeature.geometry.coordinates,
       zoom: 15
     });
-
-  const createPopUp = (currentFeature) => {
-    const popUps = document.getElementsByClassName('mapboxgl-popup');
-    /** Check if there is already a popup on the map and if so, remove it */
-    if (popUps[0]) popUps[0].remove();
-
-    const popup = new mapboxgl.Popup({ closeOnClick: false })
-      .setLngLat(currentFeature.geometry.coordinates)
-      .setHTML(
-        `<h3>${currentFeature.properties.title}</h3>` +
-          '<h4>' +
-          currentFeature.properties.address +
-          '</h4>'
-      )
-      .addTo(map);
   };
+
+  // const createPopUp = useCallback(
+  //   (currentFeature) => {
+  //     console.log('map 3', map);
+  //     if (!map) return;
+  //     // Check for .remove() for older browsers
+  //     if (!('remove' in Element.prototype)) {
+  //       Element.prototype.remove = function () {
+  //         if (this.parentNode) {
+  //           this.parentNode.removeChild(this);
+  //         }
+  //       };
+  //     }
+  //
+  //     const popUps = document.getElementsByClassName('mapboxgl-popup');
+  //     // Check if there is already a popup on the map and if so, remove it
+  //     if (popUps[0]) popUps[0].remove();
+  //
+  //     console.log({ currentFeature, map });
+  //     new mapboxgl.Popup({ closeOnClick: false })
+  //       .setLngLat(currentFeature.geometry.coordinates)
+  //       .setHTML(
+  //         `<h3>${currentFeature.properties.title}</h3>` +
+  //           '<h4>' +
+  //           currentFeature.properties.address +
+  //           '</h4>'
+  //       )
+  //       .addTo(map);
+  //   },
+  //   [map]
+  // );
 
   return (
     <motion.div
