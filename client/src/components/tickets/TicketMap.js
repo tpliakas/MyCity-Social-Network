@@ -93,21 +93,21 @@ const TicketMap = ({ onMapChange, tickets }) => {
       const { id } = ticket;
 
       const listings = document.getElementById('listings');
-      const listing = listings.appendChild(document.createElement('div'));
+      const listing = listings.appendChild(document.createElement('a'));
 
       listing.id = 'listing-' + id;
       listing.className = 'item';
+      listing.href = '#';
+      listing.id = 'link-' + id;
 
-      const link = listing.appendChild(document.createElement('a'));
-      link.href = '#';
-      link.className = 'title';
-      link.id = 'link-' + id;
-      link.innerHTML = prop.title;
+      const title = listing.appendChild(document.createElement('span'));
+      title.className = 'title';
+      title.innerHTML = prop.title;
 
       const details = listing.appendChild(document.createElement('div'));
       details.innerHTML = `${prop.address} ${prop.addressNumber}, ${prop.area}, ${prop.city}`;
 
-      link.addEventListener('click', (e) => {
+      listing.addEventListener('click', (e) => {
         flyToTicket(ticket);
         createPopUp(ticket);
 
