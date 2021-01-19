@@ -34,6 +34,7 @@ const TicketMap = ({ onMapChange, tickets }) => {
             location,
             title
           } = ticket;
+          const image = ticket.images[0];
 
           let coordinates;
           if (location) {
@@ -48,6 +49,7 @@ const TicketMap = ({ onMapChange, tickets }) => {
               type: 'Point',
               coordinates: coordinates || []
             },
+            image: image,
             properties: {
               address: address,
               addressNumber: addressNumber,
@@ -91,23 +93,23 @@ const TicketMap = ({ onMapChange, tickets }) => {
       const { id } = ticket;
 
       const listings = document.getElementById('listings');
-      const listing = listings.appendChild(document.createElement('div'));
+      const listing = listings.appendChild(document.createElement('a'));
 
       listing.id = 'listing-' + id;
       listing.className = 'item';
+      listing.href = '#';
+      listing.id = 'link-' + id;
 
-      const link = listing.appendChild(document.createElement('a'));
-      link.href = '#';
-      link.className = 'title';
-      link.id = 'link-' + id;
-      link.innerHTML = `${prop.address} ${prop.addressNumber}`;
+      const title = listing.appendChild(document.createElement('span'));
+      title.className = 'title';
+      title.innerHTML = prop.title;
 
       const details = listing.appendChild(document.createElement('div'));
-      details.innerHTML = `${prop.area}, ${prop.city}`;
+      details.innerHTML = `${prop.address} ${prop.addressNumber}, ${prop.area}, ${prop.city}`;
 
-      link.addEventListener('click', (e) => {
+      listing.addEventListener('click', (e) => {
         flyToTicket(ticket);
-        // createPopUp(ticket);
+        createPopUp(ticket);
 
         const activeItem = document.getElementsByClassName('active');
         if (activeItem[0]) {
@@ -127,36 +129,44 @@ const TicketMap = ({ onMapChange, tickets }) => {
     });
   };
 
-  // const createPopUp = useCallback(
-  //   (currentFeature) => {
-  //     console.log('map 3', map);
-  //     if (!map) return;
-  //     // Check for .remove() for older browsers
-  //     if (!('remove' in Element.prototype)) {
-  //       Element.prototype.remove = function () {
-  //         if (this.parentNode) {
-  //           this.parentNode.removeChild(this);
-  //         }
-  //       };
-  //     }
-  //
-  //     const popUps = document.getElementsByClassName('mapboxgl-popup');
-  //     // Check if there is already a popup on the map and if so, remove it
-  //     if (popUps[0]) popUps[0].remove();
-  //
-  //     console.log({ currentFeature, map });
-  //     new mapboxgl.Popup({ closeOnClick: false })
-  //       .setLngLat(currentFeature.geometry.coordinates)
-  //       .setHTML(
-  //         `<h3>${currentFeature.properties.title}</h3>` +
-  //           '<h4>' +
-  //           currentFeature.properties.address +
-  //           '</h4>'
-  //       )
-  //       .addTo(map);
-  //   },
-  //   [map]
-  // );
+  const createPopUp = useCallback(
+    (currentFeature) => {
+      if (!map) return;
+      // Check for .remove() for older browsers
+      if (!('remove' in Element.prototype)) {
+        Element.prototype.remove = function () {
+          if (this.parentNode) {
+            this.parentNode.removeChild(this);
+          }
+        };
+      }
+
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+      // Check if there is already a popup on the map and if so, remove it
+      if (popUps[0]) popUps[0].remove();
+
+      new mapboxgl.Popup({ closeOnClick: false })
+        .setLngLat(currentFeature.geometry.coordinates)
+        .setHTML(
+          `<h3>${currentFeature.properties.title}</h3>
+          <h4>${currentFeature.properties.address} ${
+            currentFeature.properties.addressNumber
+          }, ${currentFeature.properties.area}</h4>
+          ${
+            currentFeature.image
+              ? `<img
+                src=${currentFeature.image}
+                width="100%"
+                title="Ticket image"
+                alt="Ticket image"
+              />`
+              : `<span />`
+          }`
+        )
+        .addTo(map);
+    },
+    [map]
+  );
 
   return (
     <motion.div
