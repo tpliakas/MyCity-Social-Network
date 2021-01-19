@@ -861,8 +861,8 @@ button {
 }
 
 .mapboxgl-popup-content h3 {
-  background: var(--light-color);
-  color: var(--dark-color);
+  background: var(--primary-color);
+  color: var(--white-color);
   margin: 0;
   display: block;
   padding: 10px;
