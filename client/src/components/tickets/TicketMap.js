@@ -168,6 +168,32 @@ const TicketMap = ({ onMapChange, tickets }) => {
     [map]
   );
 
+  useEffect(() => {
+    if (map) {
+      map.on('click', function (e) {
+        /* Determine if a feature in the "locations" layer exists at that point. */
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: ['locations']
+        });
+
+        if (features.length) {
+          const clickedPoint = features[0];
+
+          flyToTicket(clickedPoint);
+          /* Close all other popups and display popup for clicked store */
+          createPopUp(clickedPoint);
+          /* Highlight listing in sidebar (and remove highlight for all other listings) */
+          const activeItem = document.getElementsByClassName('active');
+          if (activeItem[0]) {
+            activeItem[0].classList.remove('active');
+          }
+          const listing = document.getElementById('link-' + clickedPoint.id);
+          listing && listing.classList.add('active');
+        }
+      });
+    }
+  }, [map, ticketsList]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
