@@ -1,5 +1,5 @@
 # Social Network Issue Tracker for Smart Cities
-
+Based on MERN stack & Mapbox API.
 ## How to run
 
 - Install [Node.js](https://nodejs.org/).
