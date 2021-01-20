@@ -728,7 +728,6 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
 }
 
 /* Map styles */
@@ -982,5 +981,8 @@ button {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+  .ticket-media {
+    justify-content: center;
   }
 }
