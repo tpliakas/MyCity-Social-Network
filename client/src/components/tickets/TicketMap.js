@@ -121,7 +121,12 @@ const TicketMap = ({ onMapChange, tickets }) => {
           : '<span class="tag canceled">' + ticket.currentStatus + '</span>';
 
       // importance tags
-      tags.innerHTML += '';
+      tags.innerHTML +=
+        importance === 'low'
+          ? '<span class="importance blue">Low importance</span>'
+          : importance === 'high'
+          ? '<span class="importance red">High importance</span>'
+          : '<span class="importance orange">Medium importance</span>';
 
       listing.addEventListener('click', (e) => {
         flyToTicket(ticket);

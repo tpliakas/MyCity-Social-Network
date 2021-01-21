@@ -870,6 +870,37 @@ button {
   background-color: rgb(255, 85, 0);
 }
 
+.importance {
+  margin-left: 5px;
+  display: inline-block;
+  height: auto;
+  margin-right: 8px;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  white-space: nowrap;
+  border: 0;
+}
+
+.importance.blue {
+  color: #1890ff;
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.importance.red {
+  color: #f5222d;
+  background: #fff1f0;
+  border-color: #ffa39e;
+}
+
+.importance.orange {
+  color: #fa8c16;
+  background: #fff7e6;
+  border-color: #ffd591;
+}
+
 /* Marker tweaks */
 .mapboxgl-popup-close-button {
   display: none;
