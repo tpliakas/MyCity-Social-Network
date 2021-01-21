@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
+import Ticket from './Ticket';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import { motion } from 'framer-motion';
 
@@ -31,6 +32,7 @@ const Dashboard = ({
             animate={{ y: 0, opacity: 1, transition: { duration: 1.2 } }}
           >
             <DashboardActions name={user?.name} />
+            <Ticket user={user} />
             <Experience experience={profile.experience} />
             <Education education={profile.education} />
             <div className="my-2">

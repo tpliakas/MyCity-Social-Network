@@ -32,7 +32,9 @@ const TicketMap = ({ onMapChange, tickets }) => {
             area,
             city,
             location,
-            title
+            title,
+            currentStatus,
+            importance
           } = ticket;
           const image = ticket.images[0];
 
@@ -50,6 +52,8 @@ const TicketMap = ({ onMapChange, tickets }) => {
               coordinates: coordinates || []
             },
             image: image,
+            currentStatus: currentStatus,
+            importance: importance,
             properties: {
               address: address,
               addressNumber: addressNumber,
@@ -90,7 +94,7 @@ const TicketMap = ({ onMapChange, tickets }) => {
     if (!ticketsList || !map) return;
     ticketsList.features.forEach((ticket, idx) => {
       const prop = ticket.properties;
-      const { id } = ticket;
+      const { id, currentStatus, importance } = ticket;
 
       const listings = document.getElementById('listings');
       const listing = listings.appendChild(document.createElement('a'));
@@ -106,6 +110,18 @@ const TicketMap = ({ onMapChange, tickets }) => {
 
       const details = listing.appendChild(document.createElement('div'));
       details.innerHTML = `${prop.address} ${prop.addressNumber}, ${prop.area}, ${prop.city}`;
+
+      const tags = listing.appendChild(document.createElement('div'));
+      // status tags
+      tags.innerHTML =
+        currentStatus === 'Pending'
+          ? '<span class="tag pending">' + ticket.currentStatus + '</span>'
+          : ticket.currentStatus === 'In Progress'
+          ? '<span class="tag in-progress">' + ticket.currentStatus + '</span>'
+          : '<span class="tag canceled">' + ticket.currentStatus + '</span>';
+
+      // importance tags
+      tags.innerHTML += '';
 
       listing.addEventListener('click', (e) => {
         flyToTicket(ticket);
@@ -167,6 +183,32 @@ const TicketMap = ({ onMapChange, tickets }) => {
     },
     [map]
   );
+
+  useEffect(() => {
+    if (map) {
+      map.on('click', function (e) {
+        /* Determine if a feature in the "locations" layer exists at that point. */
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: ['locations']
+        });
+
+        if (features.length) {
+          const clickedPoint = features[0];
+
+          flyToTicket(clickedPoint);
+          /* Close all other popups and display popup for clicked store */
+          createPopUp(clickedPoint);
+          /* Highlight listing in sidebar (and remove highlight for all other listings) */
+          const activeItem = document.getElementsByClassName('active');
+          if (activeItem[0]) {
+            activeItem[0].classList.remove('active');
+          }
+          const listing = document.getElementById('link-' + clickedPoint.id);
+          listing && listing.classList.add('active');
+        }
+      });
+    }
+  }, [map, ticketsList]);
 
   return (
     <motion.div

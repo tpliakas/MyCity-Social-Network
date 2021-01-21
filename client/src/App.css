@@ -374,7 +374,7 @@ button {
   align-items: center;
   padding: 0 2rem;
   position: fixed;
-  z-index: 1;
+  z-index: 99;
   width: 100%;
   top: 0;
   height: 70px;
@@ -728,7 +728,6 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
 }
 
 /* Map styles */
@@ -845,6 +844,30 @@ button {
 ::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 0;
+}
+
+.tag {
+  color: var(--white-color);
+  display: inline-block;
+  height: auto;
+  margin-right: 8px;
+  padding: 0 7px;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  border-radius: 2px;
+}
+
+.pending {
+  background-color: rgb(45, 183, 245);
+}
+
+.in-progress {
+  background-color: rgb(135, 208, 104);
+}
+
+.canceled {
+  background-color: rgb(255, 85, 0);
 }
 
 /* Marker tweaks */
@@ -982,5 +1005,8 @@ button {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+  .ticket-media {
+    justify-content: center;
   }
 }
