@@ -1,5 +1,7 @@
-# Social Network Issue Tracker for Smart Cities
-Based on MERN stack & Mapbox API.
+# Social Network with Issue Tracker for Smart Cities
+Built with [MERN stack](https://www.mongodb.com/mern-stack),
+[Ant Design](https://ant.design/), [Mapbox API](https://www.mapbox.com/) & 
+[Framer Motion](https://www.framer.com/motion/)
 ## How to run
 
 - Install [Node.js](https://nodejs.org/).
