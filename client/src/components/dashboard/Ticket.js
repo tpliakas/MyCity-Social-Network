@@ -13,9 +13,9 @@ const Ticket = ({ getTickets, ticket: { tickets, loading }, user }) => {
   }, [getTickets]);
 
   const currentUserTickets = useMemo(() => {
-    if (!tickets) return [];
+    if (!tickets || !user) return [];
     return tickets.filter((ticket) => ticket.user === user._id);
-  }, [tickets]);
+  }, [tickets, user]);
 
   const ticketsList = currentUserTickets.map((ticket) => (
     <tr key={ticket._id}>
