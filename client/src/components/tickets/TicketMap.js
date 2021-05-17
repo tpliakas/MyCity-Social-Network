@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch } from 'antd';
 import mapboxgl from 'mapbox-gl';
 import { motion } from 'framer-motion';
+import markerLogo from '../../img/logo-20px-red.png'
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoidGhlb3Jpb3MiLCJhIjoiY2trMGY0OHI3MGdzeTJ2cXMwZHVhdDJnMiJ9.F3BOTpZILjuG5nCjGIQB7A';
@@ -74,19 +75,27 @@ const TicketMap = ({ onMapChange, tickets }) => {
   useEffect(() => {
     if (map && ticketsList) {
       map.on('load', (e) => {
-        map.addLayer({
-          id: 'locations',
-          type: 'symbol',
-          source: {
-            type: 'geojson',
-            data: ticketsList
-          },
-          layout: {
-            'icon-image': 'ch-motorway-2',
-            'icon-allow-overlap': true
-          }
-        });
+        map.loadImage(
+          markerLogo,
+          function (error, image) {
+          if (error) throw error;
+           
+          // Add the image to the map style.
+          map.addImage('mycsn', image);
+          map.addLayer({
+            id: 'locations',
+            type: 'symbol',
+            source: {
+              type: 'geojson',
+              data: ticketsList
+            },
+            layout: {
+              'icon-image': 'mycsn',
+              'icon-allow-overlap': true
+            }
+          });
       });
+    });
     }
   }, [map, ticketsList]);
 
