@@ -1,4 +1,5 @@
-# [![Netlify Status](https://api.netlify.com/api/v1/badges/b993dd51-4acd-44d7-a6b5-4f28a798dd99/deploy-status)](https://app.netlify.com/sites/clever-khorana-b0105e/deploys)
+#### MyCSN ![MyCSN](https://github.com/gregsadetsky/heroku-ci-badge/blob/master/badges/succeeded.svg)
+
 
 # Social Network with Issue Tracker for Smart Cities
 Built with [MERN stack](https://www.mongodb.com/mern-stack),
