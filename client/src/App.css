@@ -949,16 +949,6 @@ button {
   border-bottom-color: var(--dark-color);
 }
 
-.rdw-editor-main {
-  background-color: #fff;
-}
-
-.DraftEditor-root {
-  background-color: #f5f5f5;
-  margin: 10px;
-  padding: 5px;
-}
-
 
 /* Mobile Styles */
 @media (max-width: 700px) {
