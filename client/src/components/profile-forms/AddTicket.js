@@ -231,11 +231,10 @@ const AddTicket = ({ addTicket, history }) => {
           ]}
         >
           <Editor
-            editorState={editorState}
-            onEditorStateChange={(s) => setEditorState(s)}
+            editorState={''}
+            onEditorStateChange={(s) => {}}
           />
         </Form.Item>
-        <div onClick={() => console.log(editorState)}>LOG</div>
         <input type="submit" className="btn btn-primary my-1" value="Submit" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
