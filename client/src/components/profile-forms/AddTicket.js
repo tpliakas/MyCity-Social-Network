@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { Editor } from 'react-draft-wysiwyg';
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addTicket } from '../../actions/profile';
@@ -228,8 +230,12 @@ const AddTicket = ({ addTicket, history }) => {
             }
           ]}
         >
-          <Input.TextArea />
+          <Editor
+            editorState={editorState}
+            onEditorStateChange={(s) => setEditorState(s)}
+          />
         </Form.Item>
+        <div onClick={() => console.log(editorState)}>LOG</div>
         <input type="submit" className="btn btn-primary my-1" value="Submit" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
