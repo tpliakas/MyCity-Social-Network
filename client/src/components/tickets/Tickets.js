@@ -24,6 +24,7 @@ const Tickets = ({
 
   useEffect(() => {
     getTickets();
+    return () => setShowMap(false)
   }, [getTickets]);
 
   const onMapChange = (checked) => setShowMap(checked);
