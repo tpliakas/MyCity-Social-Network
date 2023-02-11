@@ -17,7 +17,7 @@
     "@types/express": "^4.17.2",
     "bcryptjs": "^2.4.3",
     "config": "^3.2.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-validator": "^6.3.0",
     "google-auth-library": "^6.1.0",
     "gravatar": "^1.8.0",
