@@ -11,7 +11,7 @@
     "axios": "^0.21.2",
     "framer-motion": "^2.7.5",
     "mapbox-gl": "1.13.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "prettier": "^2.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
